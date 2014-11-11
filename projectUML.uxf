@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="13.0">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>0</x>
+      <y>20</y>
+      <w>500</w>
+      <h>190</h>
+    </coordinates>
+    <panel_attributes>SearchEngine
+--
+User Interface
+Add a log?
+--
++void maintainance()
++void interactiveMode()
++void stressTest()
+-AVLTree data
+-HashTable data
+-bool bAVL //true for AVL mode, false for Hash Table
+-void query(string andOr, string searchterms, bool NOT=false, string notterms
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>0</x>
+      <y>220</y>
+      <w>310</w>
+      <h>190</h>
+    </coordinates>
+    <panel_attributes>Dictionary
+--
+Contains AVL Tree of Words
+--
+-void addWord() //creates a new word
+-bool checkExist(string)
++void insert(string name, string uuid)
+-update(string uuid)
++calcFreq()
++createMFI()
+-AVLTree words //organized by alpha of name
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>0</x>
+      <y>420</y>
+      <w>420</w>
+      <h>170</h>
+    </coordinates>
+    <panel_attributes>Word
+--
+Contains AVL Tree of all of the uuids containing the word
+--
+-string name
+-AVLTree filerecords //by uuid
+-long totalOccurrences
+-add(filerecord) //adds a new file record
++update(filerecord) //adds a new FR or increases FR occurences
++calcfrequency
+--
+friend filerecords
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>0</x>
+      <y>610</y>
+      <w>310</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>FileRecord
+--
+-string fileID
+-double freq //occur/totalOccur
+-long occur //number of occurrences in a word
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>540</x>
+      <y>50</y>
+      <w>620</w>
+      <h>190</h>
+    </coordinates>
+    <panel_attributes>Parser
+--
+-id: Long
+_-ClassAttribute: Long_
+--
++void createDictionary()
++void ReadRawFile() // XML Parse - Preprocess words - dic.addWord() - create MF(Dictionary)
++void createMF(Dictionary*) //creates MFI.xml
++void MFIReadIn() //reads in MFI.xml to Hash or AVL
+-string preprocessword() // remove stopword (return "" if stopword) and stem word
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>320</x>
+      <y>230</y>
+      <w>210</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>AVL Tree
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>320</x>
+      <y>310</y>
+      <w>210</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>Hash Table
+--
+-AVLTree* ???
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>570</x>
+      <y>260</y>
+      <w>210</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>XML Parser
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>570</x>
+      <y>350</y>
+      <w>210</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>Stemmer
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>
