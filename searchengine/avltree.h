@@ -3,6 +3,8 @@
  * C++ program to Implement AVL Tree
  */
 
+//Needs search functionality, destructor, what to do for == case
+
 #ifndef AVLTREE_H
 #define AVLTREE_H
 
@@ -232,6 +234,7 @@ AVLNode<T> *AVLTree<T>::insert(AVLNode<T> *root, int value)
         root = balance (root);
     }else if (value == root->data){
         // Deal with duplicate values ? Not sure if needed
+        cout << "------------------ Duplicate Detected--------------";
     }
     return root;
 }
