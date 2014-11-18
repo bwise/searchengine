@@ -5,3 +5,7 @@ CONFIG -= qt
 
 SOURCES += main.cpp
 
+HEADERS += \
+    avlnode.h \
+    avltree.h
+
