@@ -1,7 +1,7 @@
 
 #include "Parser.h"
 
-Parser::ParseMain(char* fileName)
+void Parser::ParseMain(char* fileName)
 {
 string readBuffer = "";
 string nextWord = "";
@@ -39,4 +39,12 @@ porter2_stemmer stemmer = new porter2_stemmer();
 		 } 
 
 	}
+}
+
+std::string Parser::checkTag(std::string tagToCheck)
+{
+	for(int i = 0; i < sizeOfCompArray; i //TODO: define compArray & size of compArray
+		if( strncmp(tagToCheck, compArray[i]))
+			return compArray[i];
+
 }

@@ -11,8 +11,8 @@
 class Parser
 {
 	Parser(){};
-	ParserMain(char*);
-
+	void ParserMain(char*);
+	std::string checkTag(std::string);
 }
 
 #endif
