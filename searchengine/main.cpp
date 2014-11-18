@@ -1,12 +1,19 @@
 #include <iostream>
-#include "avltree.h"
+#include "dictionary.h"
 using namespace std;
 
 
 
 int main()
 {
-    cout << "Hello World!" << endl;
+    Dictionary * dictionary = new Dictionary(true);
+
+    dictionary->calcFreq();
+
+
+
+
+
 
     //AVLTree <int>*  avl = new AVLTree<int>();
     //avl->menu();

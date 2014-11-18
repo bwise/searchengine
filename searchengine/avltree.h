@@ -14,6 +14,7 @@
 //#include<algorithm>
 #include "avlnode.h"
 
+
 //#define pow2(n) (1 << (n))
 
 using namespace std;
@@ -24,19 +25,25 @@ public:
         int menu();
         int height(AVLNode <T> *);
         int diff(AVLNode <T> *);
+        T *search(string);
+        void display(AVLNode <T> *, int);
+        void inorder(AVLNode <T> *);
+        void preorder(AVLNode <T> *);
+        void postorder(AVLNode <T> *);
+        void insert(string n, string u);
+        void insert(string u);
+        AVLTree();
+private:
+        void insert(AVLNode<T> *root, string u);
+        void insert(AVLNode<T> *root, string n, string u);
         AVLNode <T> *rr_rotation(AVLNode <T> *);
         AVLNode <T> *ll_rotation(AVLNode <T> *);
         AVLNode <T> *lr_rotation(AVLNode <T> *);
         AVLNode <T> *rl_rotation(AVLNode <T> *);
         AVLNode <T> * balance(AVLNode <T> *);
-        AVLNode <T> * insert(AVLNode <T> *, int );
-        void display(AVLNode <T> *, int);
-        void inorder(AVLNode <T> *);
-        void preorder(AVLNode <T> *);
-        void postorder(AVLNode <T> *);
-        AVLTree();
-private:
+        AVLNode <T> * insert(AVLNode <T> *, T );
         AVLNode <T> * root;
+        T * search(AVLNode <T> *,string);
 };
 
 template<typename T>
@@ -44,6 +51,32 @@ AVLTree<T>::AVLTree()
 {
     root = NULL;
 }
+
+/*
+ * Private Search
+ */
+template<typename T>
+T* AVLTree<T>::search(AVLNode <T> * cur, string n){
+    T* temp=NULL;
+    if(cur->data.name==n)
+        return &(cur->data);
+    else if(cur->data<n && cur->left!=NULL)
+        temp = search(cur->left,n);
+    else if(cur->data>n && cur->right!=NULL)
+        temp = search(cur->right,n);
+
+    return temp;
+}
+
+/*
+ * Public Search
+ */
+template<typename T>
+T* AVLTree<T>::search(string n){
+    return search(root,n);
+}
+
+
 
 /*
  * Main Contains Menu
@@ -209,11 +242,92 @@ AVLNode<T> *AVLTree<T>::balance(AVLNode<T> *temp)
     return temp;
 }
 
-/*
+/* Public Insert Word
  * Insert Element into the tree
  */
 template<typename T>
-AVLNode<T> *AVLTree<T>::insert(AVLNode<T> *root, int value)
+void AVLTree<T>::insert(string n, string u){
+    insert(root, n, u);
+}
+
+/* Private Insert FileRecord
+ * Insert Element into the tree
+ */
+template<typename T>
+void AVLTree<T>::insert(AVLNode<T> *root, string u){
+
+    if (root == NULL)
+    {
+        root = new AVLNode<T>;
+        root->data.insert(u);
+        //root->data = value;
+        root->left = NULL;
+        root->right = NULL;
+    }
+    else if (root->data>u)
+    {
+        insert(root->left, u);
+        root = balance (root);
+    }
+    else if (root->data<u)
+    {
+        insert(root->right, u);
+        root = balance (root);
+    }else if(root->data==u){
+        insert(u);
+        // Deal with duplicate values ? Not sure if needed
+        cout << "------------------ Duplicate Detected--------------";
+    }
+
+}
+
+
+
+/* Public Insert File Record
+ * Insert Element into the tree
+ */
+template<typename T>
+void AVLTree<T>::insert(string u){
+    insert(root, u);
+}
+
+/* Private Insert Word
+ * Insert Element into the tree
+ */
+template<typename T>
+void AVLTree<T>::insert(AVLNode<T> *root,string n, string u){
+
+    if (root == NULL)
+    {
+        root = new AVLNode<T>;
+        root->data.insert(n,u);
+        //root->data = value;
+        root->left = NULL;
+        root->right = NULL;
+    }
+    else if (root->data>n)
+    {
+        insert(root->left, n,u);
+        root = balance (root);
+    }
+    else if (root->data<n)
+    {
+        insert(root->right, n,u);
+        root = balance (root);
+    }else if(root->data==n){
+        root->data.insert(n,u);
+        // Deal with duplicate values ? Not sure if needed
+        cout << "------------------ Duplicate Detected--------------";
+    }
+
+}
+
+
+/* Original
+ * Insert Element into the tree
+ */
+template<typename T>
+AVLNode<T> *AVLTree<T>::insert(AVLNode<T> *root, T value)
 {
     if (root == NULL)
     {
