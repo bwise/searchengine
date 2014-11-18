@@ -8,6 +8,8 @@ int main()
 {
     Dictionary * dictionary = new Dictionary(true);
 
+    dictionary->addWord("Christina", "Chase");
+
     dictionary->calcFreq();
 
 

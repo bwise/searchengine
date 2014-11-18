@@ -12,11 +12,12 @@ class Dictionary
 {
 private:
     bool avlmode;
-    void addWord(string name, string uuid);
     bool checkExists(string name);
     void update(string u);
     AVLTree<Word>* words;
+    bool debug=true;
 public:
+    void addWord(string name, string uuid);
     Dictionary(bool avl);
     Dictionary();
     ~Dictionary();

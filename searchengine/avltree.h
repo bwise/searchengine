@@ -34,6 +34,7 @@ public:
         void insert(string u);
         AVLTree();
 private:
+        bool debug=true;
         void insert(AVLNode<T> *root, string u);
         void insert(AVLNode<T> *root, string n, string u);
         AVLNode <T> *rr_rotation(AVLNode <T> *);
@@ -49,6 +50,9 @@ private:
 template<typename T>
 AVLTree<T>::AVLTree()
 {
+    if(debug)
+        cout << "AVL Tree Instantiation\n";
+
     root = NULL;
 }
 
@@ -57,6 +61,10 @@ AVLTree<T>::AVLTree()
  */
 template<typename T>
 T* AVLTree<T>::search(AVLNode <T> * cur, string n){
+
+    if(debug)
+        cout << "Search "<< n << "\n";
+
     T* temp=NULL;
     if(cur->data.name==n)
         return &(cur->data);
@@ -73,6 +81,9 @@ T* AVLTree<T>::search(AVLNode <T> * cur, string n){
  */
 template<typename T>
 T* AVLTree<T>::search(string n){
+    if(debug)
+        cout << "Public Search "<< n << "\n";
+
     return search(root,n);
 }
 
@@ -247,6 +258,9 @@ AVLNode<T> *AVLTree<T>::balance(AVLNode<T> *temp)
  */
 template<typename T>
 void AVLTree<T>::insert(string n, string u){
+    if(debug)
+        cout << "Public Insert Word "<< n<< " "<< u << "\n";
+
     insert(root, n, u);
 }
 
@@ -255,6 +269,9 @@ void AVLTree<T>::insert(string n, string u){
  */
 template<typename T>
 void AVLTree<T>::insert(AVLNode<T> *root, string u){
+
+    if(debug)
+        cout << "Private Insert FileRecord "<< u << "\n";
 
     if (root == NULL)
     {
@@ -288,6 +305,8 @@ void AVLTree<T>::insert(AVLNode<T> *root, string u){
  */
 template<typename T>
 void AVLTree<T>::insert(string u){
+    if(debug)
+        cout << "Public Insert FileRecord "<< u << "\n";
     insert(root, u);
 }
 
@@ -296,6 +315,9 @@ void AVLTree<T>::insert(string u){
  */
 template<typename T>
 void AVLTree<T>::insert(AVLNode<T> *root,string n, string u){
+
+    if(debug)
+        cout << "Private Insert Word "<< n << " "<< u << "\n";
 
     if (root == NULL)
     {
@@ -329,6 +351,9 @@ void AVLTree<T>::insert(AVLNode<T> *root,string n, string u){
 template<typename T>
 AVLNode<T> *AVLTree<T>::insert(AVLNode<T> *root, T value)
 {
+    if(debug)
+        cout << "Public Insert Original \n";
+
     if (root == NULL)
     {
         root = new AVLNode<T>;
