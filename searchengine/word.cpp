@@ -2,7 +2,7 @@
 
 Word::Word(string n, string uuid){
     if(debug)
-        cout << "New Word Object "<< n << " "<< uuid <<"\n";
+        cout << "Word: New Word Object "<< n << " "<< uuid <<"\n";
 
     name=n;
     this->add(uuid);
@@ -11,7 +11,7 @@ Word::Word(string n, string uuid){
 
 Word::Word(){
     if(debug)
-        cout << "New Word Object\n";
+        cout << "Word: New Word Object\n";
 
     filerecords=new AVLTree<FileRecord>();
     name="";
@@ -20,16 +20,16 @@ Word::Word(){
 
 Word::~Word(){
     if(debug)
-        cout << "Delete Word "<< this->name <<"\n";
+        cout << "Word: Delete Word "<< this->name <<"\n";
 
     delete filerecords;
 }
 
 void Word::insert(string n,string u){
     if(debug)
-        cout << "Insert FileRecord"<< n << " "<< u <<"\n";
+        cout << "Word: Insert FileRecord "<< n << " "<< u <<"\n";
 
-    if(name!=""){
+    if(name==""){
         name=n;
         add(u);
     }else
@@ -38,26 +38,32 @@ void Word::insert(string n,string u){
 
 void Word::add(string filerec){
     if(debug)
-        cout << "Add FileRecord "<< filerec <<"\n";
+        cout << "Word: Add FileRecord "<< filerec <<"\n";
 
-    if(filerecords->search(filerec)!=NULL)
+    if(filerecords->search(filerec)==NULL)
         filerecords->insert(filerec);
     else
         update(filerec);
+
+    totalOccurences++;
 }
 
 void Word::update(string filerec){
     if(debug)
-        cout << "Update FileRecord "<< filerec <<"\n";
+        cout << "Word: Update FileRecord "<< filerec <<"\n";
 
-    if(filerecords->search(filerec)!=NULL)
-    filerecords->search(filerec)->increment();
+    FileRecord * fr=filerecords->search(filerec);
+
+    if(fr!=NULL)
+        fr->increment();
+    else
+        cout << "Something Bad Happened, Word.add(u) should have caught this.\n";
 }
 
-void Word::calcfreq(){
+void Word::calcFreq(){
     if(debug)
-        cout << "CalcFreq\n";
-
+        cout << "Word: CalcFreq: "<< name <<"\n";
+    filerecords->calcFreq(totalOccurences);
 }
 
 bool Word::operator<(string n){

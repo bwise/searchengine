@@ -15,7 +15,7 @@ public:
     FileRecord();
     FileRecord(string fid, long occ);
     void increment();
-    void calc(long total);
+    void calcFreq(long total);
     void insert(string u);
     bool operator<(string n);
     bool operator>(string n);
@@ -24,7 +24,7 @@ private:
     string name; //fileID
     double freq;
     long occur;
-    bool debug=true;
+    bool debug=false;
 
 };
 

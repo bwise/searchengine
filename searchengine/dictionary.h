@@ -15,7 +15,7 @@ private:
     bool checkExists(string name);
     void update(string u);
     AVLTree<Word>* words;
-    bool debug=true;
+    bool debug=false;
 public:
     void addWord(string name, string uuid);
     Dictionary(bool avl);

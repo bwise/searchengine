@@ -32,11 +32,16 @@ public:
         void postorder(AVLNode <T> *);
         void insert(string n, string u);
         void insert(string u);
+        void calcFreq();
+        void calcFreq(long);
         AVLTree();
+        ~AVLTree();
 private:
-        bool debug=true;
-        void insert(AVLNode<T> *root, string u);
-        void insert(AVLNode<T> *root, string n, string u);
+        bool debug=false;
+        void insert(AVLNode<T> *&root, string u);
+        void insert(AVLNode<T> *&root, string n, string u);
+        void calcFreq(AVLNode<T>* tree);
+        void calcFreq(AVLNode<T>* tree, long);
         AVLNode <T> *rr_rotation(AVLNode <T> *);
         AVLNode <T> *ll_rotation(AVLNode <T> *);
         AVLNode <T> *lr_rotation(AVLNode <T> *);
@@ -51,10 +56,20 @@ template<typename T>
 AVLTree<T>::AVLTree()
 {
     if(debug)
-        cout << "AVL Tree Instantiation\n";
+        cout << "AVL: AVL Tree Instantiation\n";
 
     root = NULL;
 }
+
+template<typename T>
+AVLTree<T>::~AVLTree()
+{
+    if(debug)
+        cout << "AVL: AVL Tree Destruction";
+
+    root = NULL;
+}
+
 
 /*
  * Private Search
@@ -63,7 +78,10 @@ template<typename T>
 T* AVLTree<T>::search(AVLNode <T> * cur, string n){
 
     if(debug)
-        cout << "Search "<< n << "\n";
+        cout << "AVL: Search "<< n << "\n";
+
+    if(cur==NULL)
+        return NULL;
 
     T* temp=NULL;
     if(cur->data.name==n)
@@ -82,7 +100,7 @@ T* AVLTree<T>::search(AVLNode <T> * cur, string n){
 template<typename T>
 T* AVLTree<T>::search(string n){
     if(debug)
-        cout << "Public Search "<< n << "\n";
+        cout << "AVL: Public Search "<< n << "\n";
 
     return search(root,n);
 }
@@ -91,7 +109,7 @@ T* AVLTree<T>::search(string n){
 
 /*
  * Main Contains Menu
- */
+ *
 template<typename T>
 int AVLTree<T>::menu()
 {
@@ -112,6 +130,7 @@ int AVLTree<T>::menu()
         cin>>choice;
         switch(choice)
         {
+
         case 1:
             cout<<"Enter value to be inserted: ";
             cin>>item;
@@ -149,7 +168,7 @@ int AVLTree<T>::menu()
         }
     }
     return 0;
-}
+}*/
 
 /*
  * Height of AVL Tree
@@ -259,7 +278,7 @@ AVLNode<T> *AVLTree<T>::balance(AVLNode<T> *temp)
 template<typename T>
 void AVLTree<T>::insert(string n, string u){
     if(debug)
-        cout << "Public Insert Word "<< n<< " "<< u << "\n";
+        cout << "AVL: Public Insert Word "<< n<< " "<< u << "\n";
 
     insert(root, n, u);
 }
@@ -268,10 +287,10 @@ void AVLTree<T>::insert(string n, string u){
  * Insert Element into the tree
  */
 template<typename T>
-void AVLTree<T>::insert(AVLNode<T> *root, string u){
+void AVLTree<T>::insert(AVLNode<T> *&root, string u){
 
     if(debug)
-        cout << "Private Insert FileRecord "<< u << "\n";
+        cout << "AVL: Private Insert FileRecord "<< u << "\n";
 
     if (root == NULL)
     {
@@ -291,13 +310,14 @@ void AVLTree<T>::insert(AVLNode<T> *root, string u){
         insert(root->right, u);
         root = balance (root);
     }else if(root->data==u){
-        insert(u);
+        cout << "AVL: ------------------ Duplicate FR Detected--------------\n";
+        //cout << "AVL: --You should not be seeing this line of code. Uh-Oh.--\n";
+        //cout << "AVL: --Word.update(u) should handle this piece of code.  --\n";
+        root->data.increment();
         // Deal with duplicate values ? Not sure if needed
-        cout << "------------------ Duplicate Detected--------------";
     }
 
 }
-
 
 
 /* Public Insert File Record
@@ -306,7 +326,7 @@ void AVLTree<T>::insert(AVLNode<T> *root, string u){
 template<typename T>
 void AVLTree<T>::insert(string u){
     if(debug)
-        cout << "Public Insert FileRecord "<< u << "\n";
+        cout << "AVL: Public Insert FileRecord "<< u << "\n";
     insert(root, u);
 }
 
@@ -314,10 +334,10 @@ void AVLTree<T>::insert(string u){
  * Insert Element into the tree
  */
 template<typename T>
-void AVLTree<T>::insert(AVLNode<T> *root,string n, string u){
+void AVLTree<T>::insert(AVLNode<T> * & root,string n, string u){
 
     if(debug)
-        cout << "Private Insert Word "<< n << " "<< u << "\n";
+        cout << "AVL: Private Insert Word "<< n << " "<< u << "\n";
 
     if (root == NULL)
     {
@@ -337,9 +357,10 @@ void AVLTree<T>::insert(AVLNode<T> *root,string n, string u){
         insert(root->right, n,u);
         root = balance (root);
     }else if(root->data==n){
+        if(debug)
+            cout << "AVL: - Duplicate Word Detected -\n";
         root->data.insert(n,u);
         // Deal with duplicate values ? Not sure if needed
-        cout << "------------------ Duplicate Detected--------------";
     }
 
 }
@@ -347,12 +368,12 @@ void AVLTree<T>::insert(AVLNode<T> *root,string n, string u){
 
 /* Original
  * Insert Element into the tree
- */
+ *
 template<typename T>
 AVLNode<T> *AVLTree<T>::insert(AVLNode<T> *root, T value)
 {
     if(debug)
-        cout << "Public Insert Original \n";
+        cout << "AVL: Public Insert Original \n";
 
     if (root == NULL)
     {
@@ -376,11 +397,11 @@ AVLNode<T> *AVLTree<T>::insert(AVLNode<T> *root, T value)
         cout << "------------------ Duplicate Detected--------------";
     }
     return root;
-}
+}*/
 
 /*
  * Display AVL Tree
- */
+ *
 template<typename T>
 void AVLTree<T>::display(AVLNode<T> *ptr, int level)
 {
@@ -393,10 +414,77 @@ void AVLTree<T>::display(AVLNode<T> *ptr, int level)
         cout<<"Root -> ";
         for (i = 0; i < level && ptr != root; i++)
             cout<<"        ";
-        cout<<ptr->data;
+        cout<<ptr->data.name;
         display(ptr->left, level + 1);
     }
+}*/
+
+/*
+ * Public calcFreq
+ */
+template<typename T>
+void AVLTree<T>::calcFreq(){
+    if(debug)
+        cout << "AVL: Public AVLTree CalcFreq\n";
+    calcFreq(root);
 }
+
+
+/*
+ * Private calcFreq
+ */
+template<typename T>
+void AVLTree<T>::calcFreq(AVLNode<T> *tree){
+    if(debug)
+        cout << "AVL: Private AVLTree CalcFreq\n";
+
+    if (tree == NULL){
+        if(debug)
+            cout << "AVL: Empty Tree\n";
+        return;
+    }
+    if(tree->left!=NULL)
+        calcFreq(tree->left);
+    if(debug && false)
+        cout<<"AVL: " << tree->data.name<<"  \n";
+    tree->data.calcFreq();
+    if(tree->right!=NULL)
+        calcFreq(tree->right);
+}
+
+/*
+ * Public calcFreq for FRs
+ */
+template<typename T>
+void AVLTree<T>::calcFreq(long i){
+    if(debug)
+        cout << "AVL: Public AVLTree CalcFreq\n";
+    calcFreq(root,i);
+}
+
+
+/*
+ * Private calcFreq for FR
+ */
+template<typename T>
+void AVLTree<T>::calcFreq(AVLNode<T> *tree, long i){
+    if(debug)
+        cout << "AVL: Private AVLTree CalcFreq\n";
+
+    if (tree == NULL){
+        if(debug)
+            cout << "AVL: Empty Tree\n";
+        return;
+    }
+    if(tree->left!=NULL)
+        calcFreq(tree->left,i);
+    if(debug&&false)
+        cout<<"AVL: " << tree->data.name<<"  \n";
+    tree->data.calcFreq(i);
+    if(tree->right!=NULL)
+        calcFreq(tree->right,i);
+}
+
 
 /*
  * Inorder Traversal of AVL Tree

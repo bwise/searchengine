@@ -13,14 +13,14 @@ private:
     string name;
     AVLTree <FileRecord>* filerecords;
     long totalOccurences;
-    bool debug=true;
+    bool debug=false;
     void add(string filerec);
 public:
     Word();
     Word(string n, string u);
     ~Word();
     void update(string filerec);
-    void calcfreq();
+    void calcFreq();
     void insert(string, string);
     bool operator<(string n);
     bool operator>(string n);
