@@ -1,8 +1,11 @@
 #ifndef AVLNODE_H
 #define AVLNODE_H
 
+//Needs Encapsulation Protection?
+
 template <class T> class AVLNode
 {
+
 public:
     AVLNode();
     T data;
@@ -11,8 +14,9 @@ public:
 };
 
 template<typename T>
-AVLNode<T>::AVLNode()
-{
+AVLNode<T>::AVLNode(){
+    left=NULL;
+    right=NULL;
 }
 
 #endif // AVLNODE_H
