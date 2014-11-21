@@ -4,16 +4,23 @@
 
 #include <iostream>
 #include <fstream>
-#include "tinyxml.h"
-#include "tinystr.h"
-#include "porter2_stemmer.h"
 #include <string>
+
+#include "porter2_stemmer.h"
+
+#include "rapidxml.hpp"
+#include "rapidxml_print.hpp"
+#include "rapidxml_utils.hpp"
+
+#include <sys/types.h>
+#include <dirent.h>
+#include <errno.h>
 
 class Parser
 {
 	Parser(){};
 	void parseMain(char*);
-	std::string checkTag(std::string);
+	int getdir(std::string dir, std::vector<std::string> &files);
 };
 
 #endif

@@ -1,5 +1,26 @@
 #include "porter2_stemmer.h"
 #include "Parser.h"
+#include <vector>
+
+using namespace rapidxml;
+
+ int Parser::getdir(std::string dir, std::vector<std::string> &files)
+{
+	DIR *dp;
+	struct dirent *dirp;
+	if((dp = opendir(dir.c_str())) == NULL) {
+	std::cout << "Error(" << errno << ") opening " << dir << std::endl;
+	return errno;
+	}
+	while ((dirp = readdir(dp)) != NULL) {
+	std::cout << "Directory opened, reading files" << std::endl;
+	std::cout << std::string(dirp->d_name) << std::endl;
+	files.push_back(std::string(dirp->d_name));
+	}
+	closedir(dp);
+	return 0;
+}
+
 
 void Parser::parseMain(char* fileName)
 {
@@ -7,52 +28,117 @@ std::string readBuffer = "";
 std::string nextWord = "";
 std::string nextTag = "";
 std::string uniqueID = ""; 
+xml_document<> doc;
 
+std::string dir = std::string("WikiDump");
+std::vector<std::string> files = std::vector<std::string>();
+std::string line = "";
 
+std::string oneDot = ".";
+std::string twoDot = "..";
+std::string check = " ";
+std::string page = "page";
+std::string title = "title";
+std::string id = "id";
+std::string revision = "revision";
+std::string contributor = "contributor";
+std::string username = "username";
+std::string ip = "ip";
+std::string text = "text";
+
+std::string filepath = " ";
+
+getdir(dir, files);
+
+xml_node<> *medianWikiNode = NULL;
+xml_node<> *pageNode = NULL;
+xml_node<> *titleNode = NULL;
+xml_node<> *idNode = NULL;
+xml_node<> *revisorNode = NULL;
+xml_node<> *contributorNode = NULL;
+xml_node<> *usernameNode = NULL;
+xml_node<> *textNode = NULL;
+
+for(unsigned int x = 0; x < files.size(); x++)
+{
+	filepath = dir + "/" + files[x];
+
+if  (files[x].compare(oneDot) == 0)
+{}
+else if  (files[x].compare(twoDot) == 0)
+{}
+else
+{
 
 //read words from the XML base file
- 
-	TiXmlDocument doc( fileName ); //Use TinyXML to parse file? FIGURE OUT HOW THIS WORKS
-	doc.LoadFile();
-}
- 
- iostream readInit(fileName); //Basic read logic
+
+ std::ifstream readInit(fileName); //Basic read logic
  readInit.open(fileName);
  
- while(!readInit.eof())
+ std::vector<char>buffer((std::istreambuf_iterator<char>(readInit)),std::istreambuf_iterator<char>());
+ buffer.push_back('\0');
+ 
+ doc.parse<0>(&buffer[0]);
+ 
+ xml_node<> *mediaWikiNode = doc.first_node(); //every file starts with wikimedia
+ 
+ //now find a page
+ xml_node<> *pageNode = mediaWikiNode->first_node();
+ std::string check = pageNode->name();
+ while(page.compare(check) != 0)
  {
-	//check if you get a tag
-	readInit >> readBuffer;
-	if (readBuffer[0] == '<') //you have a tag
-		nextTag = checkTag( readBuffer); //TODO: clear < > 
-
-	//either create new tag, or append word to tag
-	 //TODO: create a function that checks a tag array/ checks if we need the info
-
-	//check if you get a word or a uniqueID
-	 if(nextTag == "Sha1") //TODO: check XML tags for ID identifier
-		 {
-		 uniqueID = readBuffer; //get the unique ID associated with the word
-		 }
-	 else
-		 {
-		 nextWord = readBuffer; //TODO: check that this is a correct assumption
-		 //stem the word
-		nextWord = porter2_stemmer stemmer::stem(nextWord);
-		 //send the word and its ID to the dictionary
-		 dictonary.addWord(unqiueID, nextWord);
-		 } 
-
+	pageNode = pageNode->next_sibling();
+	check = pageNode->name();
+ }
+ 
+ while(pageNode != NULL)
+ {
+ //get the title of the page
+	titleNode = pageNode->first_node();
+	check = titleNode->name();
+	while (title.compare(check) != 0)
+	{
+	titleNode = titleNode->next_sibling();
+	check = titleNode->name();
 	}
+//get the ID associated with the page
+	idNode = idNode->next_sibling();
+	check = idNode->name();
 	
+	while(id.compare(check) == 0)
+	{
+	idNode = idNode->next_sibling();
+	check = idNode->name();
+	}
+//get who last worked on the page (revised)
+	revisorNode = idNode->next_sibling();
+	check = revisorNode->name();
+	while (revision.compare(check) != 0)
+	{
+	revisorNode = revisorNode->next_sibling();
+	check = revisorNode->name();
+	}
+//get who last worked on the page (contributed)
+	contributorNode = revisorNode->first_node();
+	check = contributorNode->name();
+	while(contributor.compare(check) != 0)
+	{
+	contributorNode = contributorNode->next_sibling();
+	check = contributorNode->name();
+	}
+//get original author of the page
+	usernameNode = contributorNode->first_node();
+	check = usernameNode->name();
+	while( username.compare(check) != 0 && usernameNode != NULL)
+	{
+	usernameNode = usernameNode->next_sibling();
+	check = usernameNode->name();
+	}
+//advance to the next page
+	pageNode = pageNode->next_sibling();
 }
-
-std::string Parser::checkTag(std::string tagToCheck)
-{
-int  sizeOfCompArray = 3;
-string compArray[] = {"Sha1" , "Title", "text"} //increase useful tags
-	for(int i = 0; i < sizeOfCompArray; i //TODO: define compArray & size of compArray
-		if( strncmp(tagToCheck, compArray[i]))
-			return compArray[i];
-
+readInit.close();
+readInit.clear();
+ }
+ }
 }
