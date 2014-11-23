@@ -1,8 +1,23 @@
+
 #include "porter2_stemmer.h"
 #include "Parser.h"
 #include <vector>
 
 using namespace rapidxml;
+
+int main(int argc, char* argv[])
+{
+	Parser parseEntry(argv[0]);//create a parser object
+	
+	return 0;
+}
+
+
+Parser::Parser(char* fileName)
+{
+	parseMain(fileName);
+}
+
 
  int Parser::getdir(std::string dir, std::vector<std::string> &files)
 {
