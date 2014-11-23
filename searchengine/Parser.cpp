@@ -154,6 +154,11 @@ else
 }
 readInit.close();
 readInit.clear();
+
+//std::ofstream write("defaultXMLout.txt");
+//print(write, doc, 0);
+//write.close();
+//write.clear();
  }
  }
 }
