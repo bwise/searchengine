@@ -17,8 +17,9 @@
 #include <errno.h>
 
 class Parser
-{
-	Parser(){};
+{	public:
+	Parser(char*);
+	private:
 	void parseMain(char*);
 	int getdir(std::string dir, std::vector<std::string> &files);
 };
