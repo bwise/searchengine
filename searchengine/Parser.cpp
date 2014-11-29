@@ -7,7 +7,7 @@ using namespace rapidxml;
 
 int main(int argc, char* argv[])
 {
-	Parser parseEntry(argv[0]);//create a parser object
+	Parser parseEntry(argv[1]);//create a parser object
 	
 	return 0;
 }
