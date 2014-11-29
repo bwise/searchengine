@@ -39,16 +39,20 @@ Parser::Parser(char* fileName)
 
 void Parser::parseMain(char* fileName)
 {
+//read buffers and necessary variables to stemming etc
 std::string readBuffer = "";
 std::string nextWord = "";
 std::string nextTag = "";
 std::string uniqueID = ""; 
+
+//file<> xmlFile(fileName); //denotes an XML file; potentially unnecessary?
+
 xml_document<> doc;
 
 std::string dir = std::string("WikiDump");
 std::vector<std::string> files = std::vector<std::string>();
 std::string line = "";
-
+//declaration of strings to compare: XML tags expected values
 std::string oneDot = ".";
 std::string twoDot = "..";
 std::string check = " ";
@@ -62,9 +66,9 @@ std::string ip = "ip";
 std::string text = "text";
 
 std::string filepath = " ";
-
+//getDir creates a vector of XML document names
 getdir(dir, files);
-
+//Creation of empty nodes to keep in scope
 xml_node<> *medianWikiNode = NULL;
 xml_node<> *pageNode = NULL;
 xml_node<> *titleNode = NULL;
@@ -90,10 +94,12 @@ else
  std::ifstream readInit(fileName); //Basic read logic
  readInit.open(fileName);
  
- std::vector<char>buffer((std::istreambuf_iterator<char>(readInit)),std::istreambuf_iterator<char>());
+ std::vector<char>buffer((std::istreambuf_iterator<char>(readInit)),std::istreambuf_iterator<char>()); //grabs the file names from getDir
  buffer.push_back('\0');
  
- doc.parse<0>(&buffer[0]);
+ doc.parse<0>(&buffer[0]);//The doc object should now contain the contents of the XML.
+
+//We begin to read through the doc object to find information we want
  
  xml_node<> *mediaWikiNode = doc.first_node(); //every file starts with wikimedia
  
@@ -156,7 +162,7 @@ readInit.close();
 readInit.clear();
 
 //std::ofstream write("defaultXMLout.txt");
-//print(write, doc, 0);
+//print(std::cout, doc, 0);
 //write.close();
 //write.clear();
  }
