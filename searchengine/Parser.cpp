@@ -28,6 +28,8 @@ Parser::Parser(char* fileName)
 	return errno;
 	}
 	while ((dirp = readdir(dp)) != NULL) {
+		if (std::string(dirp->d_name) == "." || std::string(dirp->d_name) == "..")
+			break;
 	std::cout << "Directory opened, reading files" << std::endl;
 	std::cout << std::string(dirp->d_name) << std::endl;
 	files.push_back(std::string(dirp->d_name));
