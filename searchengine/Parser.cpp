@@ -6,9 +6,16 @@
 using namespace rapidxml;
 
 int main(int argc, char* argv[])
+{	
+	if(argc < 2)
+{	
+	std::cout << "argc: " << argc << std::endl;
+	std::cout << "Enter an arguement" << std::endl;
+}
+else
 {
-	Parser parseEntry(argv[1]);//create a parser object
-	
+	Parser parseEntry(argv[1]);//create a parser object; should be argv[0]?
+}	
 	return 0;
 }
 
@@ -80,8 +87,11 @@ xml_node<> *contributorNode = NULL;
 xml_node<> *usernameNode = NULL;
 xml_node<> *textNode = NULL;
 
+std::cout << "Declarations finished" << std::endl;
+
 for(unsigned int x = 0; x < files.size(); x++)
 {
+	std::cout << "Entered for file.size() loop" << std::endl;
 	filepath = dir + "/" + files[x];
 
 if  (files[x].compare(oneDot) == 0)
@@ -99,20 +109,28 @@ else
  std::vector<char>buffer((std::istreambuf_iterator<char>(readInit)),std::istreambuf_iterator<char>()); //grabs the file names from getDir
  buffer.push_back('\0');
  
+std::cout << "Preparse" << std::endl;
+
  doc.parse<0>(&buffer[0]);//The doc object should now contain the contents of the XML.
 
+std::cout << "Postparse" << std::endl;
 //We begin to read through the doc object to find information we want
  
  xml_node<> *mediaWikiNode = doc.first_node(); //every file starts with wikimedia
+
+std::cout << "mediaWikiNode declared"<< std::endl; //this cout prints
  
  //now find a page
- xml_node<> *pageNode = mediaWikiNode->first_node();
+ xml_node<> *pageNode = mediaWikiNode->first_node();//this line segfaults, I think
+std::cout << "I segfaulted here." << std::endl; //this cout doesn't print
  std::string check = pageNode->name();
+std::cout << "check is " << check << std::endl;
  while(page.compare(check) != 0)
  {
 	pageNode = pageNode->next_sibling();
 	check = pageNode->name();
- }
+	std::cout << " check inside while is " <<  check << std::endl; 
+}
  
  while(pageNode != NULL)
  {
