@@ -30,13 +30,20 @@ Parser::Parser(char* fileName)
 {
 	DIR *dp;
 	struct dirent *dirp;
+	struct stat filestat;
+	std::string filepath;
+
 	if((dp = opendir(dir.c_str())) == NULL) {
 	std::cout << "Error(" << errno << ") opening " << dir << std::endl;
 	return errno;
 	}
 	while ((dirp = readdir(dp)) != NULL) {
-		if (std::string(dirp->d_name) == "." || std::string(dirp->d_name) == "..")
-			break;
+
+	filepath = dir + "/" + dirp->d_name;
+		if (stat(filepath.c_str(),&filestat)) continue;
+		if(S_ISDIR(filestat.st_mode)) continue;
+	
+		
 	std::cout << "Directory opened, reading files" << std::endl;
 	std::cout << std::string(dirp->d_name) << std::endl;
 	files.push_back(std::string(dirp->d_name));
@@ -88,23 +95,41 @@ xml_node<> *usernameNode = NULL;
 xml_node<> *textNode = NULL;
 
 std::cout << "Declarations finished" << std::endl;
+std::cout << fileName << std::endl;
 
+ std::ifstream readInit(fileName); //Basic read logic
+
+std::cout << "Tryin' open the file" << std::endl;
+
+ 
+ std::cout << fileName;
+if(readInit.is_open())
+	std::cout << "We're in business, boys!" << std::endl;
+
+std::cout << readInit.good() << std::endl;
+std::cout << readInit.eof() << std::endl;
+std::cout << readInit.fail() << std::endl;
+std::cout << readInit.bad() << std::endl;
+if(readInit.good())
+{
 for(unsigned int x = 0; x < files.size(); x++)
 {
 	std::cout << "Entered for file.size() loop" << std::endl;
 	filepath = dir + "/" + files[x];
 
 if  (files[x].compare(oneDot) == 0)
-{}
+{//do nothing
+}
 else if  (files[x].compare(twoDot) == 0)
-{}
+{//do nothing
+}
 else
 {
 
 //read words from the XML base file
 
- std::ifstream readInit(fileName); //Basic read logic
- readInit.open(fileName);
+// std::ifstream readInit(fileName); //Basic read logic
+// readInit.open(fileName);
  
  std::vector<char>buffer((std::istreambuf_iterator<char>(readInit)),std::istreambuf_iterator<char>()); //grabs the file names from getDir
  buffer.push_back('\0');
@@ -122,7 +147,6 @@ std::cout << "mediaWikiNode declared"<< std::endl; //this cout prints
  
  //now find a page
  xml_node<> *pageNode = mediaWikiNode->first_node();//this line segfaults, I think
-std::cout << "I segfaulted here." << std::endl; //this cout doesn't print
  std::string check = pageNode->name();
 std::cout << "check is " << check << std::endl;
  while(page.compare(check) != 0)
@@ -177,6 +201,7 @@ std::cout << "check is " << check << std::endl;
 	}
 //advance to the next page
 	pageNode = pageNode->next_sibling();
+}
 }
 readInit.close();
 readInit.clear();

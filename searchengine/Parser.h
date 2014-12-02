@@ -13,8 +13,10 @@
 #include "rapidxml_utils.hpp"
 
 #include <sys/types.h>
+#include <sys/stat.h>
 #include <dirent.h>
 #include <errno.h>
+#include <unistd.h>
 
 class Parser
 {	public:
