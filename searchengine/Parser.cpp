@@ -5,24 +5,18 @@
 
 using namespace rapidxml;
 
-int main(int argc, char* argv[])
+int main()
 {	
-	if(argc < 2)
-{	
-	std::cout << "argc: " << argc << std::endl;
-	std::cout << "Enter an arguement" << std::endl;
-}
-else
-{
-	Parser parseEntry(argv[1]);//create a parser object; should be argv[0]?
-}	
+	
+	Parser parseEntry();//create a parser object; 
+	
 	return 0;
 }
 
 
-Parser::Parser(char* fileName)
+Parser::Parser()
 {
-	parseMain(fileName);
+	parseMain();
 }
 
 
@@ -49,11 +43,12 @@ Parser::Parser(char* fileName)
 	files.push_back(std::string(dirp->d_name));
 	}
 	closedir(dp);
+	std::cout << "leaving getdir" << std::endl;
 	return 0;
 }
 
 
-void Parser::parseMain(char* fileName)
+void Parser::parseMain()
 {
 //read buffers and necessary variables to stemming etc
 std::string readBuffer = "";
@@ -62,7 +57,7 @@ std::string nextTag = "";
 std::string uniqueID = ""; 
 
 //file<> xmlFile(fileName); //denotes an XML file; potentially unnecessary?
-
+std::cout << "Declaring variables" << std::endl;
 xml_document<> doc;
 
 std::string dir = std::string("WikiDump");
@@ -81,11 +76,14 @@ std::string username = "username";
 std::string ip = "ip";
 std::string text = "text";
 
+std::ifstream theFile;
+
 std::string filepath = " ";
 //getDir creates a vector of XML document names
+std::cout << "entering getdir" << std::endl;
 getdir(dir, files);
 //Creation of empty nodes to keep in scope
-xml_node<> *medianWikiNode = NULL;
+xml_node<> *mediaWikiNode = NULL;
 xml_node<> *pageNode = NULL;
 xml_node<> *titleNode = NULL;
 xml_node<> *idNode = NULL;
@@ -94,24 +92,7 @@ xml_node<> *contributorNode = NULL;
 xml_node<> *usernameNode = NULL;
 xml_node<> *textNode = NULL;
 
-std::cout << "Declarations finished" << std::endl;
-std::cout << fileName << std::endl;
-
- std::ifstream readInit(fileName); //Basic read logic
-
-std::cout << "Tryin' open the file" << std::endl;
-
- 
- std::cout << fileName;
-if(readInit.is_open())
-	std::cout << "We're in business, boys!" << std::endl;
-
-std::cout << readInit.good() << std::endl;
-std::cout << readInit.eof() << std::endl;
-std::cout << readInit.fail() << std::endl;
-std::cout << readInit.bad() << std::endl;
-if(readInit.good())
-{
+std::cout << files.size() << std::endl;
 for(unsigned int x = 0; x < files.size(); x++)
 {
 	std::cout << "Entered for file.size() loop" << std::endl;
@@ -128,22 +109,16 @@ else
 
 //read words from the XML base file
 
-// std::ifstream readInit(fileName); //Basic read logic
-// readInit.open(fileName);
+ theFile.open(filepath.c_str());
  
- std::vector<char>buffer((std::istreambuf_iterator<char>(readInit)),std::istreambuf_iterator<char>()); //grabs the file names from getDir
+ std::vector<char>buffer((std::istreambuf_iterator<char>(theFile)),std::istreambuf_iterator<char>()); //grabs the file names from getDir
  buffer.push_back('\0');
- 
-std::cout << "Preparse" << std::endl;
 
  doc.parse<0>(&buffer[0]);//The doc object should now contain the contents of the XML.
 
-std::cout << "Postparse" << std::endl;
 //We begin to read through the doc object to find information we want
  
  xml_node<> *mediaWikiNode = doc.first_node(); //every file starts with wikimedia
-
-std::cout << "mediaWikiNode declared"<< std::endl; //this cout prints
  
  //now find a page
  xml_node<> *pageNode = mediaWikiNode->first_node();//this line segfaults, I think
@@ -161,19 +136,28 @@ std::cout << "check is " << check << std::endl;
  //get the title of the page
 	titleNode = pageNode->first_node();
 	check = titleNode->name();
+	std::cout << "check inside pageNode is: " << check << std::endl;
+
 	while (title.compare(check) != 0)
 	{
 	titleNode = titleNode->next_sibling();
 	check = titleNode->name();
+	std::cout << "check inside title is: " << check << std::endl;
 	}
 //get the ID associated with the page
+	if(idNode->next_sibling() == NULL)
+		std::cout << "ya dun goofed" << std::endl;
 	idNode = idNode->next_sibling();
+	std::cout << "made it here";
 	check = idNode->name();
 	
+	std::cout << "check after idNode assignment is " << check << std::endl;
+
 	while(id.compare(check) == 0)
 	{
 	idNode = idNode->next_sibling();
 	check = idNode->name();
+	std::cout << "check idNode is: " << check << std::endl;
 	}
 //get who last worked on the page (revised)
 	revisorNode = idNode->next_sibling();
@@ -182,6 +166,7 @@ std::cout << "check is " << check << std::endl;
 	{
 	revisorNode = revisorNode->next_sibling();
 	check = revisorNode->name();
+	std::cout << "revisor node: " << check << std::endl;
 	}
 //get who last worked on the page (contributed)
 	contributorNode = revisorNode->first_node();
@@ -203,13 +188,6 @@ std::cout << "check is " << check << std::endl;
 	pageNode = pageNode->next_sibling();
 }
 }
-readInit.close();
-readInit.clear();
 
-//std::ofstream write("defaultXMLout.txt");
-//print(std::cout, doc, 0);
-//write.close();
-//write.clear();
- }
  }
 }
