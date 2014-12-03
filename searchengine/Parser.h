@@ -23,13 +23,9 @@ class Parser
 {	public:
 	Parser();
 	private:
-<<<<<<< HEAD
 	void parseMain();
-	int getdir(std::string dir, std::vector<std::string> &files);
-=======
-	void parseMain(char*);
-    int getDir(std::string dir, std::vector<std::string> &files);
->>>>>>> ad66745875c25bc411bb81dd3943b4c37a8d6140
+	int getDir(std::string dir, std::vector<std::string> &files);
+
 };
 
 #endif
