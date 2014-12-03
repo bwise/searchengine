@@ -21,7 +21,7 @@ class Parser
 	Parser(char*);
 	private:
 	void parseMain(char*);
-	int getdir(std::string dir, std::vector<std::string> &files);
+    int getDir(std::string dir, std::vector<std::string> &files);
 };
 
 #endif

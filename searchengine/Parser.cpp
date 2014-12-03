@@ -4,7 +4,7 @@
 #include <vector>
 
 using namespace rapidxml;
-
+/*
 int main(int argc, char* argv[])
 {	
 	if(argc < 2)
@@ -18,7 +18,7 @@ else
 }	
 	return 0;
 }
-
+*/
 
 Parser::Parser(char* fileName)
 {
@@ -26,7 +26,7 @@ Parser::Parser(char* fileName)
 }
 
 
- int Parser::getdir(std::string dir, std::vector<std::string> &files)
+ int Parser::getDir(std::string dir, std::vector<std::string> &files)
 {
 	DIR *dp;
 	struct dirent *dirp;
@@ -76,7 +76,7 @@ std::string text = "text";
 
 std::string filepath = " ";
 //getDir creates a vector of XML document names
-getdir(dir, files);
+getDir(dir, files);
 //Creation of empty nodes to keep in scope
 xml_node<> *medianWikiNode = NULL;
 xml_node<> *pageNode = NULL;
