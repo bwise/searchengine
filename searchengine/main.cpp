@@ -1,11 +1,16 @@
 #include <iostream>
 #include "dictionary.h"
+#include "Parser.h"
 using namespace std;
 
 
 
-int main()
+int main(int argc, char* argv[])
 {
+    cout << argv[1] <<endl;
+
+    Parser parseEntry(argv[1]);//create a parser object; should be argv[0]?
+    /*
     Dictionary * dictionary = new Dictionary(true);
 
     dictionary->addWord("Christina", "Chase");
@@ -35,7 +40,7 @@ int main()
 
     cout << "\n\n-------------\nUpdating FRs\n-----------\n\n";
     dictionary->calcFreq();
-
+    */
     return 0;
 }
 

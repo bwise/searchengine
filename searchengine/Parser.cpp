@@ -4,15 +4,20 @@
 #include <vector>
 
 using namespace rapidxml;
+<<<<<<< HEAD
 
 int main()
+=======
+/*
+int main(int argc, char* argv[])
+>>>>>>> ad66745875c25bc411bb81dd3943b4c37a8d6140
 {	
 	
 	Parser parseEntry();//create a parser object; 
 	
 	return 0;
 }
-
+*/
 
 Parser::Parser()
 {
@@ -20,7 +25,7 @@ Parser::Parser()
 }
 
 
- int Parser::getdir(std::string dir, std::vector<std::string> &files)
+ int Parser::getDir(std::string dir, std::vector<std::string> &files)
 {
 	DIR *dp;
 	struct dirent *dirp;
@@ -80,8 +85,12 @@ std::ifstream theFile;
 
 std::string filepath = " ";
 //getDir creates a vector of XML document names
+<<<<<<< HEAD
 std::cout << "entering getdir" << std::endl;
 getdir(dir, files);
+=======
+getDir(dir, files);
+>>>>>>> ad66745875c25bc411bb81dd3943b4c37a8d6140
 //Creation of empty nodes to keep in scope
 xml_node<> *mediaWikiNode = NULL;
 xml_node<> *pageNode = NULL;
