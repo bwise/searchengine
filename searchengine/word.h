@@ -5,6 +5,7 @@
 #include <iostream>
 #include "avltree.h"
 #include "filerecord.h"
+#include "math.h"
 
 class Word
 {
@@ -15,12 +16,14 @@ private:
     long totalOccurences;
     bool debug=false;
     void add(string filerec);
+    long numFR;
+    double idf;
 public:
     Word();
     Word(string n, string u);
     ~Word();
     void update(string filerec);
-    void calcFreq();
+    void calcFreq(long);
     void insert(string, string);
     bool operator<(string n);
     bool operator>(string n);

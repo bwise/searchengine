@@ -9,7 +9,8 @@ SOURCES += main.cpp \
     word.cpp \
     filerecord.cpp \
     Parser.cpp \
-    porter2_stemmer.cpp
+    porter2_stemmer.cpp \
+    results.cpp
 
 HEADERS += \
     avlnode.h \
@@ -22,7 +23,8 @@ HEADERS += \
     rapidxml.hpp \
     rapidxml_iterators.hpp \
     rapidxml_print.hpp \
-    rapidxml_utils.hpp
+    rapidxml_utils.hpp \
+    results.h
 
 OTHER_FILES += \
     Parser.h.gch \

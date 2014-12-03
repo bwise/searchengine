@@ -1,5 +1,14 @@
 #include "filerecord.h"
 
+string FileRecord::getName(){
+    return name;
+}
+
+double FileRecord::tdidf(double idf){
+    return freq*idf;
+}
+
+
 FileRecord::FileRecord()
 {
     name="";

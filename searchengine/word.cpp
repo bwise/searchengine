@@ -16,6 +16,8 @@ Word::Word(){
     filerecords=new AVLTree<FileRecord>();
     name="";
     totalOccurences=0;
+    numFR=0;
+    idf=0.0;
 }
 
 Word::~Word(){
@@ -40,8 +42,10 @@ void Word::add(string filerec){
     if(debug)
         cout << "Word: Add FileRecord "<< filerec <<"\n";
 
-    if(filerecords->search(filerec)==NULL)
+    if(filerecords->search(filerec)==NULL){
         filerecords->insert(filerec);
+        numFR++;
+    }
     else
         update(filerec);
 
@@ -60,10 +64,11 @@ void Word::update(string filerec){
         cout << "Something Bad Happened, Word.add(u) should have caught this.\n";
 }
 
-void Word::calcFreq(){
+void Word::calcFreq(long numDocs){
     if(debug)
         cout << "Word: CalcFreq: "<< name <<"\n";
     filerecords->calcFreq(totalOccurences);
+    idf=log(200000.0/(numFR*1.0));
 }
 
 bool Word::operator<(string n){

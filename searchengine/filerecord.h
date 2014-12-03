@@ -20,6 +20,8 @@ public:
     bool operator<(string n);
     bool operator>(string n);
     bool operator==(string n);
+    string getName();
+    double tdidf(double idf);
 private:
     string name; //fileID
     double freq;

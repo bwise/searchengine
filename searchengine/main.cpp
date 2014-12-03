@@ -7,10 +7,11 @@ using namespace std;
 
 int main(int argc, char* argv[])
 {
+    /*
     cout << argv[1] <<endl;
 
     Parser parseEntry(argv[1]);//create a parser object; should be argv[0]?
-    /*
+
     Dictionary * dictionary = new Dictionary(true);
 
     dictionary->addWord("Christina", "Chase");
