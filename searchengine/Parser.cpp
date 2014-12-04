@@ -8,15 +8,17 @@ using namespace rapidxml;
 
 int main()
 {	
-	
-	Parser parseEntry();//create a parser object; 
-	
+	std::cout << "Entered main" << std::endl;
+
+//	Parser parseEntry();//create a parser object; 
+	Parser* parseEntry = new Parser();
+//	parseEntry->parseMain();
 	return 0;
 }
 
 
 Parser::Parser()
-{
+{	std::cout << "created object" << std::endl;
 	parseMain();
 }
 
@@ -51,6 +53,7 @@ Parser::Parser()
 
 void Parser::parseMain()
 {
+ std::cout<<"Parsing main" <<std::endl;
 //read buffers and necessary variables to stemming etc
 std::string readBuffer = "";
 std::string nextWord = "";
@@ -121,10 +124,10 @@ else
 
 //We begin to read through the doc object to find information we want
  
- xml_node<> *mediaWikiNode = doc.first_node(); //every file starts with wikimedia
+ mediaWikiNode = doc.first_node(); //every file starts with wikimedia
  
  //now find a page
- xml_node<> *pageNode = mediaWikiNode->first_node();//this line segfaults, I think
+ pageNode = mediaWikiNode->first_node();//this line segfaults, I think
  std::string check = pageNode->name();
 std::cout << "check is " << check << std::endl;
  while(page.compare(check) != 0)
@@ -147,10 +150,11 @@ std::cout << "check is " << check << std::endl;
 	check = titleNode->name();
 	std::cout << "check inside title is: " << check << std::endl;
 	}
+	std::cout << "after while" << std::endl;
 //get the ID associated with the page
-	if(idNode->next_sibling() == NULL)
-		std::cout << "ya dun goofed" << std::endl;
-	idNode = idNode->next_sibling();
+
+
+	idNode = pageNode->next_sibling();
 	std::cout << "made it here";
 	check = idNode->name();
 	
@@ -165,32 +169,56 @@ std::cout << "check is " << check << std::endl;
 //get who last worked on the page (revised)
 	revisorNode = idNode->next_sibling();
 	check = revisorNode->name();
+	int squirtle = 0;
 	while (revision.compare(check) != 0)
 	{
-	revisorNode = revisorNode->next_sibling();
-	check = revisorNode->name();
-	std::cout << "revisor node: " << check << std::endl;
+std::cout << "this it?" << std::endl;	
+		revisorNode = revisorNode->next_sibling();
+		check = revisorNode->name();
+			
+	std::cout << "revisor node: " << check << squirtle++ <<  std::endl;
 	}
+
+	//get the text of the revision
+	std::cout << "made it hrtr"<<std::endl;
+	textNode = revisorNode->first_node();
+	check = textNode->name();
+	while(text.compare(check) != 0)
+	{
+	textNode = textNode->next_sibling();
+	check = textNode->name();
+	}
+
+//somewhere here, we capture the text and send it to the stemmer
+	if(textNode != NULL) //text node has data
+	{
+	text = textNode->value();
+	//I belive this is where the stemmer goes
+	//stem(text);?
+	}
+
+//We have the text back, stemmed, we move down the page
 //get who last worked on the page (contributed)
-	contributorNode = revisorNode->first_node();
-	check = contributorNode->name();
-	while(contributor.compare(check) != 0)
-	{
-	contributorNode = contributorNode->next_sibling();
-	check = contributorNode->name();
-	}
+//	contributorNode = revisorNode->first_node();
+//	check = contributorNode->name();
+//	while(contributor.compare(check) != 0)
+//	{
+//	contributorNode = contributorNode->next_sibling();
+//	check = contributorNode->name();
+//	}
 //get original author of the page
-	usernameNode = contributorNode->first_node();
-	check = usernameNode->name();
-	while( username.compare(check) != 0 && usernameNode != NULL)
-	{
-	usernameNode = usernameNode->next_sibling();
-	check = usernameNode->name();
-	}
+//	usernameNode = contributorNode->first_node();
+//	check = usernameNode->name();
+//	while( username.compare(check) != 0 && usernameNode != NULL)
+//	{
+//	usernameNode = usernameNode->next_sibling();
+//	check = usernameNode->name();
+//	}
 //advance to the next page
 	pageNode = pageNode->next_sibling();
 }
 }
-
+theFile.close();
+theFile.clear();
  }
 }
