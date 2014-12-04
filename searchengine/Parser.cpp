@@ -172,7 +172,7 @@ void Parser::parseMain()
 				int squirtle = 0;
 				while (revision.compare(check) != 0)
 				{
-					std::cout << "this it?" << std::endl; //segfaults on ~7th page?
+					std::cout << revisorNode->first_node()->value() << std::endl;					
 					if (revisorNode->next_sibling() == NULL)
 						break;
 					else{
@@ -180,18 +180,18 @@ void Parser::parseMain()
 						check = revisorNode->name();
 					}
 					std::cout << "revisor node: " << check << squirtle++ << std::endl;
+				
 				}
 
 				//get the text of the revision
 				std::cout << "made it here" << std::endl;
-
-				textNode = revisorNode->();//idNode->next_sibling(); //revisorNode->first_node();
-				check = textNode->name();
+				textNode =revisorNode->first_node();
+				check = textNode->value();
 				std::cout << check;
 				while (text.compare(check) != 0)
 				{
 					textNode = textNode->next_sibling();
-					check = textNode->name();
+					check = textNode->value();
 				}
 
 				//somewhere here, we capture the text and send it to the stemmer
