@@ -9,6 +9,15 @@ Word::Word(string n, string uuid){
     totalOccurences=0;
 }
 
+results * Word::returnresults(){
+    results* r = new results();
+    filerecords->calcFreq();
+
+    filerecords->returnresults(r, idf);
+    return r;
+
+}
+
 Word::Word(){
     if(debug)
         cout << "Word: New Word Object\n";
@@ -64,7 +73,7 @@ void Word::update(string filerec){
         cout << "Something Bad Happened, Word.add(u) should have caught this.\n";
 }
 
-void Word::calcFreq(long numDocs){
+void Word::calcFreq(){
     if(debug)
         cout << "Word: CalcFreq: "<< name <<"\n";
     filerecords->calcFreq(totalOccurences);

@@ -7,6 +7,19 @@ using namespace std;
 
 int main(int argc, char* argv[])
 {
+    Dictionary * dictionary = new Dictionary(true);
+
+    dictionary->addWord("Christina", "Chase");
+    dictionary->addWord("Christina", "Chas");
+    dictionary->addWord("Christina", "Chase");
+    dictionary->addWord("Christina", "Chase");
+    dictionary->addWord("Christina", "Chase");
+
+    dictionary->calcFreq();
+
+    dictionary->query("Christina")->display();
+
+
     /*
     cout << argv[1] <<endl;
 

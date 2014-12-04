@@ -6,6 +6,7 @@
 #include "avltree.h"
 #include "filerecord.h"
 #include "math.h"
+#include "results.h"
 
 class Word
 {
@@ -23,11 +24,12 @@ public:
     Word(string n, string u);
     ~Word();
     void update(string filerec);
-    void calcFreq(long);
+    void calcFreq();
     void insert(string, string);
     bool operator<(string n);
     bool operator>(string n);
     bool operator==(string n);
+    results* returnresults();
 
 };
 

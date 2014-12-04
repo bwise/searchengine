@@ -38,6 +38,10 @@ Dictionary::~Dictionary(){
     }
 }
 
+results * Dictionary::query(string a){
+    return words->search(a)->returnresults();
+}
+
 void Dictionary::addWord(string name, string uuid){
     if(debug)
         cout << "Dict: Dictionary ADD Word "<<name << " " << uuid<<"\n";
@@ -102,6 +106,7 @@ void Dictionary::calcFreq(){
     }
 }
 
+/*
 void Dictionary::createMFI(){
     if(debug)
         cout << "Dict: Dictionary CreateMFI\n";
@@ -124,3 +129,4 @@ void Dictionary::readMFI(string mfiName){
 
     }
 }
+*/
