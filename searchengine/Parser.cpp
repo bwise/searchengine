@@ -150,12 +150,11 @@ std::cout << "check is " << check << std::endl;
 	check = titleNode->name();
 	std::cout << "check inside title is: " << check << std::endl;
 	}
-	std::cout << "after while" << std::endl;
+	
 //get the ID associated with the page
 
 
 	idNode = pageNode->next_sibling();
-	std::cout << "made it here";
 	check = idNode->name();
 	
 	std::cout << "check after idNode assignment is " << check << std::endl;
@@ -183,9 +182,11 @@ std::cout << "this it?" << std::endl; //segfaults on ~7th page?
 	}
 
 	//get the text of the revision
-	std::cout << "made it hrtr"<<std::endl;
-	textNode = revisorNode->first_node();
+	std::cout << "made it here"<<std::endl;
+
+	textNode =revisorNode->();//idNode->next_sibling(); //revisorNode->first_node();
 	check = textNode->name();
+	std::cout <<  check;
 	while(text.compare(check) != 0)
 	{
 	textNode = textNode->next_sibling();
