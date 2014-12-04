@@ -172,10 +172,13 @@ std::cout << "check is " << check << std::endl;
 	int squirtle = 0;
 	while (revision.compare(check) != 0)
 	{
-std::cout << "this it?" << std::endl;	
+std::cout << "this it?" << std::endl; //segfaults on ~7th page?
+	if(revisorNode->next_sibling() == NULL)
+		break;
+	else{	
 		revisorNode = revisorNode->next_sibling();
 		check = revisorNode->name();
-			
+	}		
 	std::cout << "revisor node: " << check << squirtle++ <<  std::endl;
 	}
 
