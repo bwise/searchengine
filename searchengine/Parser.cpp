@@ -198,7 +198,7 @@ void Parser::parseMain()
 				while (text.compare(check) != 0)
 				{
 					textNode = textNode->next_sibling();
-					check = textNode->value();
+					check = textNode->name();
 				}
 				std::cout << "merp";
 				//somewhere here, we capture the text and send it to the stemmer
