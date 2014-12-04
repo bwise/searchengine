@@ -4,6 +4,7 @@
 #include<string>
 #include <iostream>
 #include "avltree.h"
+#include "results.h"
 
 
 using namespace std;
@@ -15,11 +16,15 @@ public:
     FileRecord();
     FileRecord(string fid, long occ);
     void increment();
+    void calcFreq(){}
     void calcFreq(long total);
     void insert(string u);
     bool operator<(string n);
     bool operator>(string n);
     bool operator==(string n);
+    string getName();
+    double tdidf(double idf);
+    void addresult(results*r, double idf);
 private:
     string name; //fileID
     double freq;

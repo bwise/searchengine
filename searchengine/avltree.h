@@ -13,9 +13,12 @@
 //#include<sstream>
 //#include<algorithm>
 #include "avlnode.h"
+//#include "results.h"
 
 
 //#define pow2(n) (1 << (n))
+
+class results;
 
 using namespace std;
 
@@ -27,6 +30,7 @@ public:
         int diff(AVLNode <T> *);
         T *search(string);
         void display(AVLNode <T> *, int);
+        void returnresults(results *r, double);
         void inorder(AVLNode <T> *);
         void preorder(AVLNode <T> *);
         void postorder(AVLNode <T> *);
@@ -42,6 +46,7 @@ private:
         void insert(AVLNode<T> *&root, string n, string u);
         void calcFreq(AVLNode<T>* tree);
         void calcFreq(AVLNode<T>* tree, long);
+        void returnresults(AVLNode<T>*, results *r, double);
         AVLNode <T> *rr_rotation(AVLNode <T> *);
         AVLNode <T> *ll_rotation(AVLNode <T> *);
         AVLNode <T> *lr_rotation(AVLNode <T> *);
@@ -484,6 +489,31 @@ void AVLTree<T>::calcFreq(AVLNode<T> *tree, long i){
     if(tree->right!=NULL)
         calcFreq(tree->right,i);
 }
+
+
+/*
+ * Public Inorder returnresults of AVL Tree
+ */
+template<typename T>
+void AVLTree<T>::returnresults(results *r, double idf)
+{
+    returnresults(root,r, idf);
+}
+
+/*
+ * Inorder returnresults of AVL Tree
+ */
+template<typename T>
+void AVLTree<T>::returnresults(AVLNode<T> *tree, results *r, double idf)
+{
+    if (tree == NULL)
+        return;
+
+    returnresults(tree->left,r, idf);
+    tree->data.addresult(r, idf);
+    returnresults(tree->right,r, idf);
+}
+
 
 
 /*

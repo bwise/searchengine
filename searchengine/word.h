@@ -5,6 +5,8 @@
 #include <iostream>
 #include "avltree.h"
 #include "filerecord.h"
+#include "math.h"
+#include "results.h"
 
 class Word
 {
@@ -15,6 +17,8 @@ private:
     long totalOccurences;
     bool debug=false;
     void add(string filerec);
+    long numFR;
+    double idf;
 public:
     Word();
     Word(string n, string u);
@@ -25,6 +29,7 @@ public:
     bool operator<(string n);
     bool operator>(string n);
     bool operator==(string n);
+    results* returnresults();
 
 };
 
