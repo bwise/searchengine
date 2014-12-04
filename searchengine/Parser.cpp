@@ -155,12 +155,12 @@ void Parser::parseMain()
 				//get the ID associated with the page
 
 
-				idNode = pageNode->next_sibling();
+				idNode = titleNode->next_sibling();//->next_sibling();
 				check = idNode->name();
 
 				std::cout << "check after idNode assignment is " << check << std::endl;
 
-				while (id.compare(check) == 0)
+				while (id.compare(check) != 0)
 				{
 					idNode = idNode->next_sibling();
 					check = idNode->name();
@@ -185,15 +185,22 @@ void Parser::parseMain()
 
 				//get the text of the revision
 				std::cout << "made it here" << std::endl;
+				if(revisorNode->first_node() != NULL)
+				{ 
+				std::cout << "derp";
 				textNode =revisorNode->first_node();
-				check = textNode->value();
+				std::cout<< textNode->name();
+				}
+
+				std::cout << "here" << std::endl<<textNode<< check<< std::endl;
+				check = textNode->name();
 				std::cout << check;
 				while (text.compare(check) != 0)
 				{
 					textNode = textNode->next_sibling();
 					check = textNode->value();
 				}
-
+				std::cout << "merp";
 				//somewhere here, we capture the text and send it to the stemmer
 				if (textNode != NULL) //text node has data
 				{
