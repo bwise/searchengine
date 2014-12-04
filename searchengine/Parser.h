@@ -5,6 +5,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <sstream>
 
 #include "porter2_stemmer.h"
 
@@ -20,10 +21,11 @@
 
 class Parser
 {	public:
-	Parser(char*);
+	Parser();
 	private:
-	void parseMain(char*);
-    int getDir(std::string dir, std::vector<std::string> &files);
+	void parseMain();
+	int getDir(std::string dir, std::vector<std::string> &files);
+
 };
 
 #endif
