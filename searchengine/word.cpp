@@ -9,11 +9,18 @@ Word::Word(string n, string uuid){
     totalOccurences=0;
 }
 
+string Word::getName(){
+    return name;
+}
+
+
 results * Word::returnresults(){
     results* r = new results();
+
     filerecords->calcFreq();
 
     filerecords->returnresults(r, idf);
+
     return r;
 
 }

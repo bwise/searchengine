@@ -5,7 +5,7 @@
 
 using namespace rapidxml;
 
-
+/*
 int main()
 {
 	std::cout << "Entered main" << std::endl;
@@ -14,7 +14,7 @@ int main()
 	Parser* parseEntry = new Parser();
 	//	parseEntry->parseMain();
 	return 0;
-}
+}*/
 
 
 Parser::Parser()

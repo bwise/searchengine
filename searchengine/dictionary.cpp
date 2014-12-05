@@ -28,6 +28,8 @@ Dictionary::Dictionary(bool avl){
 
 Dictionary::~Dictionary(){
 
+    cout << "\n\nCLEARING ALL DOCUMENTS\n\n";
+
     if(debug)
         cout << "Dict: Destroy Dictionary\n";
 
@@ -39,7 +41,13 @@ Dictionary::~Dictionary(){
 }
 
 results * Dictionary::query(string a){
-    return words->search(a)->returnresults();
+    //cout << "a";
+    if(words->search(a)!=NULL)
+        return words->search(a)->returnresults();
+    else{
+        cout << "Word not found: " << a << ". Continuing.";
+        return NULL;
+    }
 }
 
 void Dictionary::addWord(string name, string uuid){
