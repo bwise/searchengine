@@ -5,20 +5,19 @@
 
 using namespace rapidxml;
 
-/*
-int main()
-{
-	std::cout << "Entered main" << std::endl;
+//int main()
+//{
+//	std::cout << "Entered main" << std::endl;
+//
+//	//	Parser parseEntry();//create a parser object; 
+//	Parser* parseEntry = new Parser();
+//	//	parseEntry->parseMain();
+//	return 0;
+//}
 
-	//	Parser parseEntry();//create a parser object; 
-	Parser* parseEntry = new Parser();
-	//	parseEntry->parseMain();
-	return 0;
-}*/
 
-
-Parser::Parser()
-{
+Parser::Parser(Dictionary* dicP)
+{	dic = dicP;
 	std::cout << "created object" << std::endl;
 	parseMain();
 }
@@ -55,12 +54,6 @@ int Parser::getDir(std::string dir, std::vector<std::string> &files)
 void Parser::parseMain()
 {
 	std::cout << "Parsing main" << std::endl;
-	//read buffers and necessary variables to stemming etc
-	std::string readBuffer = "";
-	std::string nextWord = "";
-	std::string nextTag = "";
-	std::string uniqueID = "";
-
 	//file<> xmlFile(fileName); //denotes an XML file; potentially unnecessary?
 	std::cout << "Declaring variables" << std::endl;
 	xml_document<> doc;
@@ -71,13 +64,10 @@ void Parser::parseMain()
 	//declaration of strings to compare: XML tags expected values
 
 
-	std::string check = " ";
+	
 	std::string page = "page";
 	std::string title = "title";
 	std::string id = "id";
-	std::string revision = "revision";
-	std::string contributor = "contributor";
-	std::string username = "username";
 	std::string text = "text";
 	std::string author = "author";
 	std::ifstream theFile;
@@ -135,26 +125,24 @@ void Parser::parseMain()
 
 				author = element->next_sibling("revision")->first_node("contributor")->first_node("username")->value();
 				text = element->next_sibling("revision")->first_node("text")->value();				
-				
+			
 				//tokenize
-				tokenize(text);
-				//remove spec char
-				//Porter2Stemmer::stem(text);
-	
+				tokenize(text, id);
+				
 				pageNode = pageNode->next_sibling("page");
 			}
-
+			
 		theFile.close();
 		theFile.clear();
 	}
 }
 
-bool Parser::tokenize(std::string& text)
+bool Parser::tokenize(std::string& text,std::string& id)
 {
 text = rm_spec_char(text);
-std::vector<std::string> token;
+//std::vector<std::string> token;
 Porter2Stemmer::stem(text);
-token.push_back(text);
+dic.addWord(text,id);
 
 }
 

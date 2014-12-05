@@ -7,6 +7,8 @@
 #include <string>
 #include <sstream>
 
+#include "dictionary.h"
+
 #include "porter2_stemmer.h"
 
 #include "rapidxml.hpp"
@@ -21,12 +23,14 @@
 
 class Parser
 {	public:
-	Parser();
+	Parser(Dictionary*);
 	private:
 	void parseMain();
 	int getDir(std::string dir, std::vector<std::string> &files);
-	bool tokenize(std::string&);
+	bool tokenize(std::string&,std::string&);
 	std::string rm_spec_char(std::string&);
+
+	Dictionary* dic;
 };
 
 #endif
