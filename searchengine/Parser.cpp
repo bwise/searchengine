@@ -1,4 +1,4 @@
-
+#include <algorithm>
 #include "porter2_stemmer.h"
 #include "Parser.h"
 #include <vector>
@@ -69,8 +69,8 @@ void Parser::parseMain()
 	std::vector<std::string> files = std::vector<std::string>();
 	std::string line = "";
 	//declaration of strings to compare: XML tags expected values
-	//std::string oneDot = ".";
-	//std::string twoDot = "..";
+
+
 	std::string check = " ";
 	std::string page = "page";
 	std::string title = "title";
@@ -95,15 +95,6 @@ void Parser::parseMain()
 	{
 		std::cout << "Entered for file.size() loop" << std::endl;
 		filepath = dir + "/" + files[x];
-
-		//if (files[x].compare(oneDot) == 0)
-		//{//do nothing
-		//}
-		//else if (files[x].compare(twoDot) == 0)
-		//{//do nothing
-		//}
-		//else
-		//{
 
 			//read words from the XML base file
 			std::stringstream contents;
@@ -144,11 +135,33 @@ void Parser::parseMain()
 
 				author = element->next_sibling("revision")->first_node("contributor")->first_node("username")->value();
 				text = element->next_sibling("revision")->first_node("text")->value();				
-
+				
+				//tokenize
+				tokenize(text);
+				//remove spec char
+				//Porter2Stemmer::stem(text);
+	
 				pageNode = pageNode->next_sibling("page");
 			}
-	//	}
+
 		theFile.close();
 		theFile.clear();
 	}
+}
+
+bool Parser::tokenize(std::string& text)
+{
+text = rm_spec_char(text);
+std::vector<std::string> token;
+Porter2Stemmer::stem(text);
+token.push_back(text);
+
+}
+
+std::string Parser::rm_spec_char(std::string& text)
+{
+char chars[]=".,!()123456890{}'<>:/{}_|=+;-`~";
+for(unsigned int i=0; i<33; i++)
+	text.erase(std::remove(text.begin(),text.end(),chars[i]),text.end());
+return text;
 }

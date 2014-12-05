@@ -25,7 +25,8 @@ class Parser
 	private:
 	void parseMain();
 	int getDir(std::string dir, std::vector<std::string> &files);
-
+	bool tokenize(std::string&);
+	std::string rm_spec_char(std::string&);
 };
 
 #endif
