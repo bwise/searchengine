@@ -142,7 +142,7 @@ bool Parser::tokenize(std::string& text,std::string& id)
 text = rm_spec_char(text);
 //std::vector<std::string> token;
 Porter2Stemmer::stem(text);
-dic.addWord(text,id);
+dic->addWord(text,id);
 
 }
 

@@ -27,6 +27,7 @@ public:
     results *OR(results*);
     results *NOT(results*);
     results *display();
+    void openresult(int);
 
 };
 
