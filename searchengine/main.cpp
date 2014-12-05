@@ -106,6 +106,10 @@ int main(int argc, char* argv[])
             break;
         case 2://Parse
             do{
+		//update dictionary that parser uses
+		//WikiDumps or other file
+		//Parse -> dic.addWord( key/word , filename )
+		
                 /*Code to actually parse a doc
                  *
                  *
@@ -137,7 +141,7 @@ int main(int argc, char* argv[])
 
             }
             break;
-        case 6://Clear All Documents
+        case 6://Clear All Documents -Done
             if(advancedmenu){
                 cout <<"            .-\"\"\"\"\"-.\n           /         \\\n  .-.      |  _   _  |      .-.\n (_. '._   | |_\ /_| |   _.' ._)\n    '-._'-.(_   A   _).-'_.-'\n        '-._| _____ |_.-'\n       _.-\'_\`\"\"\"\"\"`/_\'-._\n  .-.-\'_.-\'  `-----\'  \'-._\'-.-.\n (,_.\'`                   `\'._,)\n";
                 cout <<"\n\nAre you sure you want to clear the index? (Y/n) \nResponse: ";
