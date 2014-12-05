@@ -1,4 +1,4 @@
-
+#include <algorithm>
 #include "porter2_stemmer.h"
 #include "Parser.h"
 #include <vector>
@@ -69,8 +69,8 @@ void Parser::parseMain()
 	std::vector<std::string> files = std::vector<std::string>();
 	std::string line = "";
 	//declaration of strings to compare: XML tags expected values
-	std::string oneDot = ".";
-	std::string twoDot = "..";
+
+
 	std::string check = " ";
 	std::string page = "page";
 	std::string title = "title";
@@ -78,152 +78,90 @@ void Parser::parseMain()
 	std::string revision = "revision";
 	std::string contributor = "contributor";
 	std::string username = "username";
-	std::string ip = "ip";
 	std::string text = "text";
-
+	std::string author = "author";
 	std::ifstream theFile;
 
 	std::string filepath = " ";
 	//getDir creates a vector of XML document names
 
-	std::cout << "entering getdir" << std::endl;
 	getDir(dir, files);
 
 	//Creation of empty nodes to keep in scope
 	xml_node<> *mediaWikiNode = NULL;
 	xml_node<> *pageNode = NULL;
-	xml_node<> *titleNode = NULL;
-	xml_node<> *idNode = NULL;
-	xml_node<> *revisorNode = NULL;
-	xml_node<> *contributorNode = NULL;
-	xml_node<> *usernameNode = NULL;
-	xml_node<> *textNode = NULL;
-
-	std::cout << files.size() << std::endl;
+	
 	for (unsigned int x = 0; x < files.size(); x++)
 	{
 		std::cout << "Entered for file.size() loop" << std::endl;
 		filepath = dir + "/" + files[x];
 
-		if (files[x].compare(oneDot) == 0)
-		{//do nothing
-		}
-		else if (files[x].compare(twoDot) == 0)
-		{//do nothing
-		}
-		else
-		{
-
 			//read words from the XML base file
-
+			std::stringstream contents;
 			theFile.open(filepath.c_str());
+			if(!theFile.is_open()){
+				std::cout << "ERROR OPENING FILE BRUH" << std::endl;
+			}
+			contents << theFile.rdbuf();
+			std::string xml_contents = contents.str();
+			std::vector<char> buffer(xml_contents.begin(),xml_contents.end()); //grabs the file names from getDir
+			buffer.push_back('\0');	
+			for(int x = 0; x < buffer.size(); x++)
+				std::cout << buffer[x];
+			std::cout << std::endl;
 
-			std::vector<char>buffer((std::istreambuf_iterator<char>(theFile)), std::istreambuf_iterator<char>()); //grabs the file names from getDir
-			buffer.push_back('\0');
-
-			doc.parse<0>(&buffer[0]);//The doc object should now contain the contents of the XML.
+			doc.parse<parse_declaration_node | parse_no_data_nodes>(&buffer[0]);//The doc object should now contain the contents of the XML.
 
 			//We begin to read through the doc object to find information we want
 
-			mediaWikiNode = doc.first_node(); //every file starts with wikimedia
-
+			mediaWikiNode = doc.first_node("mediawiki");
+			std::cout << "Mediawiki" <<std::endl;
 			//now find a page
-			pageNode = mediaWikiNode->first_node();//this line segfaults, I think
-			std::string check = pageNode->name();
-			std::cout << "check is " << check << std::endl;
-			while (page.compare(check) != 0)
-			{
-				pageNode = pageNode->next_sibling();
-				check = pageNode->name();
-				std::cout << " check inside while is " << check << std::endl;
-			}
+			pageNode = mediaWikiNode->first_node("page");
+			std::cout << "Page" << std::endl;
 
+			xml_node<>* element;
 			while (pageNode != NULL)
 			{
 				//get the title of the page
-				titleNode = pageNode->first_node();
-				check = titleNode->name();
-				std::cout << "check inside pageNode is: " << check << std::endl;
+				element = pageNode->first_node("title");
+				std::cout<< "title" << std::endl;
+				title = element->value();
+				std::cout << "\t" << title << std:: endl;
+				//std::cout << "check inside pageNode is: " << check << std::endl;
 
-				while (title.compare(check) != 0)
-				{
-					titleNode = titleNode->next_sibling();
-					check = titleNode->name();
-					std::cout << "check inside title is: " << check << std::endl;
-				}
+				id = element->next_sibling("revision")->first_node("contributor")->first_node("id")->value();
+				std::cout << "revision/id" << std::endl;
 
-				//get the ID associated with the page
-
-
-				idNode = pageNode->next_sibling();
-				check = idNode->name();
-
-				std::cout << "check after idNode assignment is " << check << std::endl;
-
-				while (id.compare(check) == 0)
-				{
-					idNode = idNode->next_sibling();
-					check = idNode->name();
-					std::cout << "check idNode is: " << check << std::endl;
-				}
-				//get who last worked on the page (revised)
-				revisorNode = idNode->next_sibling();
-				check = revisorNode->name();
-				int squirtle = 0;
-				while (revision.compare(check) != 0)
-				{
-					std::cout << revisorNode->first_node()->value() << std::endl;					
-					if (revisorNode->next_sibling() == NULL)
-						break;
-					else{
-						revisorNode = revisorNode->next_sibling();
-						check = revisorNode->name();
-					}
-					std::cout << "revisor node: " << check << squirtle++ << std::endl;
+				author = element->next_sibling("revision")->first_node("contributor")->first_node("username")->value();
+				text = element->next_sibling("revision")->first_node("text")->value();				
 				
-				}
-
-				//get the text of the revision
-				std::cout << "made it here" << std::endl;
-				textNode =revisorNode->first_node();
-				check = textNode->value();
-				std::cout << check;
-				while (text.compare(check) != 0)
-				{
-					textNode = textNode->next_sibling();
-					check = textNode->value();
-				}
-
-				//somewhere here, we capture the text and send it to the stemmer
-				if (textNode != NULL) //text node has data
-				{
-					text = textNode->value();
-					//I belive this is where the stemmer goes
-					//stem(text);?
-				}
-
-				//We have the text back, stemmed, we move down the page
-				//get who last worked on the page (contributed)
-				//	contributorNode = revisorNode->first_node();
-				//	check = contributorNode->name();
-				//	while(contributor.compare(check) != 0)
-				//	{
-				//	contributorNode = contributorNode->next_sibling();
-				//	check = contributorNode->name();
-				//	}
-				//get original author of the page
-				//	usernameNode = contributorNode->first_node();
-				//	check = usernameNode->name();
-				//	while( username.compare(check) != 0 && usernameNode != NULL)
-				//	{
-				//	usernameNode = usernameNode->next_sibling();
-				//	check = usernameNode->name();
-				//	}
-				//advance to the next page
-				pageNode = pageNode->next_sibling();
+				//tokenize
+				tokenize(text);
+				//remove spec char
+				//Porter2Stemmer::stem(text);
+	
+				pageNode = pageNode->next_sibling("page");
 			}
-		}
+
 		theFile.close();
 		theFile.clear();
 	}
+}
+
+bool Parser::tokenize(std::string& text)
+{
+text = rm_spec_char(text);
+std::vector<std::string> token;
+Porter2Stemmer::stem(text);
+token.push_back(text);
+
+}
+
+std::string Parser::rm_spec_char(std::string& text)
+{
+char chars[]=".,!()123456890{}'<>:/{}_|=+;-`~";
+for(unsigned int i=0; i<33; i++)
+	text.erase(std::remove(text.begin(),text.end(),chars[i]),text.end());
+return text;
 }
