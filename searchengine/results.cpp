@@ -13,6 +13,11 @@ void results::add(FileRecord * a, double b){
 }
 
 results* results::AND(results* a){
+    if(a==NULL)
+        return NULL;
+    if(this==NULL)
+        return NULL;
+
     bool inboth=false;
 
     for(int my=0; my<this->frstruct.size() ;my++){
@@ -33,7 +38,12 @@ results* results::AND(results* a){
     return this;
 }
 
-results * results::NOT(results* a){ // here check logic
+results * results::NOT(results* a){
+    if(a==NULL)
+        return this;
+    if(this==NULL)
+        return NULL;
+
     bool inboth=false;
 
     for(int my=0; my<this->frstruct.size() ;my++){
@@ -53,6 +63,11 @@ results * results::NOT(results* a){ // here check logic
 }
 
 results* results::OR(results* a){
+    if(a==NULL)
+        return this;
+    if(this==NULL)
+        return a;
+
     bool inboth=false;
 
     for(int my=0; my<this->frstruct.size() ;my++){
@@ -71,7 +86,7 @@ results* results::OR(results* a){
 
 
     for(int their=0; their<a->frstruct.size(); their++)
-        if(a->frstruct[their].fr==NULL)
+        if(a->frstruct[their].fr!=NULL)
             this->frstruct.push_back(a->frstruct[their]);
 
     return this;
@@ -88,6 +103,9 @@ void results::sort(){
 }
 
 results* results::display(){
+    int choice =-1;
+    cout << "------------------\n";
+    cout << "\n\nResults:\n";
 
     if(this==NULL){
         cout<< "\nNo results found!\n";
@@ -99,6 +117,8 @@ results* results::display(){
     if(frstruct.size()<howmany)
         howmany=frstruct.size();
 
+    //cout << howmany << frstruct[1].fr;
+
 
     this->sort();
 
@@ -107,6 +127,23 @@ results* results::display(){
         cout << i+1 << "\t" << frstruct[i].fr->getName()
                 << "\tRank: " << setprecision (15) << frstruct[i].tfidf <<"\n";
 
+    cout << "\nWould you like to open one of these results?\n";
+    cout << "Pick the number of the result you would like to see: ";
+    cin >> choice;
+
+    choice-=1;
+
+    if(choice<0 || choice > howmany)
+        cout << "Invalid choice : " << choice << "\n";
+    else
+        this->openresult(choice);
+
+
+
     return this;
 
+}
+
+void results::openresult(int c){
+    cout << "openresult needs to be written\n";
 }

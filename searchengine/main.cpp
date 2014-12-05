@@ -16,6 +16,14 @@ int main(int argc, char* argv[])
     char exitLoop2 = ' ';
     char clearDocs= ' ';
     char clearDocs2=' ';
+    string searchterms="";
+    string notterms="";
+    string trash="";
+    bool andflag=false;
+    bool orflag=false;
+    bool notflag=false;
+    std::size_t notpos;
+    std::size_t iter;
 
     cout << "----------------------------\n"
          << " Data Structures - CSE 2341\n"
@@ -27,9 +35,12 @@ int main(int argc, char* argv[])
     cout << "\n* Would you like to use AVL tree or Hash Table Implementation.\n"
          << "* Response: ";
 
-
     Dictionary * dictionary = new Dictionary(avlmode);
 
+    cout << "\n\n*-*-*Hash Table Mode Disabled. Implementation not complete.*-*-*\n\n";
+
+
+    //Test Section
     dictionary->addWord("Christina", "Chase");
     dictionary->addWord("Christina", "Chas");
     dictionary->addWord("Christina", "Chase");
@@ -42,33 +53,24 @@ int main(int argc, char* argv[])
     dictionary->addWord("Kris", "Chase");
 
     dictionary->calcFreq();
-
+    /*
     cout << "\n";
     dictionary->query("Christina")->display();
     cout << "\n";
     dictionary->query("Ana")->display();
     cout << "\n";
-
     dictionary->query("Kris")->display();
     cout << "\n";
-
     dictionary->query("Isaiah")->display();
     cout << "\n";
-
     dictionary->query("Christina")->AND(dictionary->query("Isaiah"))->display();
     cout << "\n";
-
     dictionary->query("Andrew")->display();
     cout << "\n";
-
-
     dictionary->query("Christina")->OR(dictionary->query("Isaiah"))->display();//->display();
     cout << "\n";
-
-    cout << "\n\n*-*-*Hash Table Mode Disabled. Implementation not complete.*-*-*\n\n";
-
-
-
+    //End Test Section
+    */
 
     while(!exit){
         string mode = avlmode?"AVL Mode\n":"Hash Table Mode\n";
@@ -103,6 +105,115 @@ int main(int argc, char* argv[])
         case 0:
             break;
         case 1://Search
+            try{
+                cout << "*****\nSearch:\n"
+                     << "Please format search in the following 3 ways:\n"
+                     << "\n\t<space separated search terms> : Defaults to AND Search\n"
+                     << "\tAND <space separated search terms> : AND Search\n"
+                     << "\tOR <space separated search terms> : OR Search\n"
+                     << "\nOptional: NOT <space separated exclude terms> : Excludes NOT Terms\n"
+                     << "\n\nSearch: ";
+
+                getline(std::cin, trash);
+                getline(std::cin,searchterms);
+
+                notpos=searchterms.find("NOT");
+                if(notpos!=std::string::npos){
+                    notterms=searchterms.substr(notpos+4,string::npos);
+                    searchterms.erase(notpos-1,string::npos);
+                    notflag=true;
+                }
+
+                searchterms.append(" ");
+
+                notpos=searchterms.find("AND");
+                if(notpos!=std::string::npos){
+                    searchterms.erase(searchterms.begin(),searchterms.begin()+4);
+                    andflag=true;
+                }
+
+                notpos=searchterms.find("OR");
+                if(notpos!=std::string::npos){
+                    searchterms.erase(searchterms.begin(),searchterms.begin()+3);
+                    orflag=true;
+                }
+
+                cout << "\nSearching for " <<searchterms << "and NOT " << notterms << ".\n";
+                //cout << andflag<<orflag<< notflag <<"\n";
+
+                if(!andflag && !orflag)
+                    orflag=true;
+
+                //cout << andflag<<orflag<< notflag <<"\n";
+
+
+                //Do Search
+                if(!(andflag==true&&orflag==true)){
+
+                    if(andflag){
+                        //cout << "AND:";
+                        results * res=NULL;
+
+                        iter=searchterms.find(' ');
+
+                        //cout<< "AND" << searchterms.substr(0,iter) << ".\n";
+                        res=dictionary->query(searchterms.substr(0, iter));
+                        searchterms.erase(0, iter+1);
+                        iter=searchterms.find(' ');
+
+                        //cout << searchterms;
+
+                        //cout << "here";
+
+                        while(iter!=string::npos){
+                            //cout<< "AND" << searchterms.substr(0,iter) << ".\n";
+                            res=res->AND(dictionary->query(searchterms.substr(0, iter)));
+                            searchterms.erase(0, iter+1);
+                            iter=searchterms.find(' ');
+                        }
+
+                        res->display();
+
+                    }else if(orflag){ //logic error, OR appears to put only intersection in list
+                        cout << "OR";
+                        results * res=NULL;
+
+                        iter=searchterms.find(' ');
+
+                        cout<< "OR" << searchterms.substr(0,iter) << ".\n";
+                        res=dictionary->query(searchterms.substr(0, iter));
+                        searchterms.erase(0, iter+1);
+                        iter=searchterms.find(' ');
+
+                        while(iter!=string::npos){
+                            cout<< "OR" << searchterms.substr(0,iter) << ".\n";
+                            res=res->OR(dictionary->query(searchterms.substr(0, iter)));
+                            searchterms.erase(0, iter+1);
+                            iter=searchterms.find(' ');
+                        }
+
+                        res->display();
+                    }
+
+                    if(notflag){
+                        cout << "NOT";
+                    }
+
+
+                }else{
+                    cout << "Error: Compound Binary Search Not Supported.\n";
+                }
+
+                searchterms="";
+                notterms="";
+                andflag=false;
+                orflag=false;
+                notflag=false;
+            }catch( exception& e){
+                cout<< "Error Thrown: \n";
+                cout << e.what();
+                cout << "\n";
+            }
             break;
         case 2://Parse
             do{
@@ -174,6 +285,8 @@ int main(int argc, char* argv[])
             exitLoop2=' ';
             break;
         }
+
+        response=0;
 
     }
 
