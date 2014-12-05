@@ -8,6 +8,7 @@
 #include "math.h"
 #include "results.h"
 
+
 class Word
 {
 friend class AVLTree<Word>;
@@ -23,6 +24,7 @@ public:
     Word();
     Word(string n, string u);
     ~Word();
+    string getName();
     void update(string filerec);
     void calcFreq();
     void insert(string, string);

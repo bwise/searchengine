@@ -5,7 +5,6 @@
 
 using namespace rapidxml;
 
-
 //int main()
 //{
 //	std::cout << "Entered main" << std::endl;

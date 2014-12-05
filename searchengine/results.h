@@ -14,7 +14,7 @@ class results
 private:
     struct frs{
         FileRecord * fr;
-        double tdidf;
+        double tfidf;
         bool operator<(frs) const;
     };
     string name;
@@ -23,10 +23,10 @@ private:
 public:
     results();
     void add(FileRecord*,double);
-    void AND(results*);
-    void OR(results*);
-    void NOT(results*);
-    void display();
+    results *AND(results*);
+    results *OR(results*);
+    results *NOT(results*);
+    results *display();
 
 };
 

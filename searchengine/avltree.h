@@ -72,7 +72,7 @@ AVLTree<T>::~AVLTree()
     if(debug)
         cout << "AVL: AVL Tree Destruction";
 
-    root = NULL;
+   delete root;
 }
 
 
@@ -89,12 +89,19 @@ T* AVLTree<T>::search(AVLNode <T> * cur, string n){
         return NULL;
 
     T* temp=NULL;
-    if(cur->data.name==n)
+
+
+
+    if(cur->data.getName()==n){
         return &(cur->data);
-    else if(cur->data<n && cur->left!=NULL)
+    }
+    else if(cur->data>n && cur->left!=NULL){
         temp = search(cur->left,n);
-    else if(cur->data>n && cur->right!=NULL)
+
+    }
+    else if(cur->data<n && cur->right!=NULL){
         temp = search(cur->right,n);
+    }
 
     return temp;
 }
