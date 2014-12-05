@@ -56,34 +56,44 @@ results * results::NOT(results* a){
                 //this->frstruct[my].tdidf+=a->frstruct[my].tdidf;
             }
 
-        if(inboth)
+        if(inboth){
             this->frstruct.erase(this->frstruct.begin()+my);
+            my--;
+        }
     }
     return this;
 }
 
 results* results::OR(results* a){
+
+
     if(a==NULL)
         return this;
     if(this==NULL)
         return a;
 
+
     bool inboth=false;
+
 
     for(int my=0; my<this->frstruct.size() ;my++){
         inboth=false;
 
-        for(int their=0; their<a->frstruct.size(); their++ )
+        for(int their=0; their<a->frstruct.size(); their++ ){
             if(this->frstruct[my].fr->getName()==a->frstruct[their].fr->getName()){
                 inboth=true;
                 this->frstruct[my].tfidf=this->frstruct[my].tfidf+a->frstruct[their].tfidf;
-                break;
             }
 
-        if(inboth)
-            a->frstruct[my].fr=NULL;
+            if(inboth){
+                //cout << "Erasing" << a->name << a->frstruct[their].fr->getName();
+                a->frstruct.erase(a->frstruct.begin()+their);
+                my--;
+            }
+        }
     }
 
+    //cout << "Here";
 
     for(int their=0; their<a->frstruct.size(); their++)
         if(a->frstruct[their].fr!=NULL)
@@ -107,7 +117,7 @@ results* results::display(){
     cout << "------------------\n";
     cout << "\n\nResults:\n";
 
-    if(this==NULL){
+    if(this==NULL||frstruct.size()==0){
         cout<< "\nNo results found!\n";
         return NULL;
     }

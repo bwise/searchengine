@@ -22,6 +22,7 @@ int main(int argc, char* argv[])
     bool andflag=false;
     bool orflag=false;
     bool notflag=false;
+    bool andorflag=false;
     std::size_t notpos;
     std::size_t iter;
 
@@ -31,6 +32,16 @@ int main(int argc, char* argv[])
          << "    Search Engine Project\n\n"
          << "Ben Wise and Kristofor Horst\n"
          << "----------------------------\n";
+
+    if(false)
+        cout << "▄██████████████▄▐█▄▄▄▄█▌\n"
+             << "██████▌▄▌▄▐▐▌███▌▀▀██▀▀\n"
+             << "████▄█▌▄▌▄▐▐▌▀███▄▄█▌\n"
+             << "▄▄▄▄▄██████████████▀\n";
+
+
+
+
 
     cout << "\n* Would you like to use AVL tree or Hash Table Implementation.\n"
          << "* Response: ";
@@ -53,24 +64,7 @@ int main(int argc, char* argv[])
     dictionary->addWord("Kris", "Chase");
 
     dictionary->calcFreq();
-    /*
-    cout << "\n";
-    dictionary->query("Christina")->display();
-    cout << "\n";
-    dictionary->query("Ana")->display();
-    cout << "\n";
-    dictionary->query("Kris")->display();
-    cout << "\n";
-    dictionary->query("Isaiah")->display();
-    cout << "\n";
-    dictionary->query("Christina")->AND(dictionary->query("Isaiah"))->display();
-    cout << "\n";
-    dictionary->query("Andrew")->display();
-    cout << "\n";
-    dictionary->query("Christina")->OR(dictionary->query("Isaiah"))->display();//->display();
-    cout << "\n";
-    //End Test Section
-    */
+
 
     while(!exit){
         string mode = avlmode?"AVL Mode\n":"Hash Table Mode\n";
@@ -127,32 +121,37 @@ int main(int argc, char* argv[])
                 searchterms.append(" ");
 
                 notpos=searchterms.find("AND");
+
                 if(notpos!=std::string::npos){
-                    searchterms.erase(searchterms.begin(),searchterms.begin()+4);
-                    andflag=true;
+                    notpos=searchterms.find("OR");
+                    if(notpos!=std::string::npos)
+                        andorflag=true;
                 }
-
-                notpos=searchterms.find("OR");
-                if(notpos!=std::string::npos){
-                    searchterms.erase(searchterms.begin(),searchterms.begin()+3);
-                    orflag=true;
-                }
-
-                cout << "\nSearching for " <<searchterms << "and NOT " << notterms << ".\n";
-                //cout << andflag<<orflag<< notflag <<"\n";
-
-                if(!andflag && !orflag)
-                    orflag=true;
-
-                //cout << andflag<<orflag<< notflag <<"\n";
-
 
                 //Do Search
-                if(!(andflag==true&&orflag==true)){
+                if(!andorflag){
+
+                    notpos=searchterms.find("AND");
+                    if(notpos!=std::string::npos){
+                        searchterms.erase(searchterms.begin(),searchterms.begin()+4);
+                        andflag=true;
+                    }
+
+                    notpos=searchterms.find("OR");
+                    if(notpos!=std::string::npos){
+                        searchterms.erase(searchterms.begin(),searchterms.begin()+3);
+                        orflag=true;
+                    }
+
+                    cout << "\nSearching for " <<searchterms << "and NOT " << notterms << ".\n";
+
+                    if(andflag==false && orflag==false)
+                        orflag=true;
+
+                    results * res=NULL;
 
                     if(andflag){
                         //cout << "AND:";
-                        results * res=NULL;
 
                         iter=searchterms.find(' ');
 
@@ -172,32 +171,50 @@ int main(int argc, char* argv[])
                             iter=searchterms.find(' ');
                         }
 
-                        res->display();
+                        //res->display();
 
-                    }else if(orflag){ //logic error, OR appears to put only intersection in list
-                        cout << "OR";
-                        results * res=NULL;
-
+                    }else if(orflag){
+                        //cout << "OR";
                         iter=searchterms.find(' ');
 
-                        cout<< "OR" << searchterms.substr(0,iter) << ".\n";
+                        //cout<< "OR" << searchterms.substr(0,iter) << ".\n";
                         res=dictionary->query(searchterms.substr(0, iter));
                         searchterms.erase(0, iter+1);
                         iter=searchterms.find(' ');
 
                         while(iter!=string::npos){
-                            cout<< "OR" << searchterms.substr(0,iter) << ".\n";
+                            //cout<< "OR" << searchterms.substr(0,iter) << ".\n";
                             res=res->OR(dictionary->query(searchterms.substr(0, iter)));
                             searchterms.erase(0, iter+1);
                             iter=searchterms.find(' ');
                         }
 
-                        res->display();
+
                     }
 
                     if(notflag){
-                        cout << "NOT";
+                        //cout << "NOT";
+
+                        iter=notterms.find(' ');
+
+                        //cout<< "AND" << searchterms.substr(0,iter) << ".\n";
+                        res=res->NOT(dictionary->query(notterms.substr(0, iter)));
+                        notterms.erase(0, iter+1);
+                        iter=notterms.find(' ');
+
+                        //cout << searchterms;
+
+                        //cout << "here";
+
+                        while(iter!=string::npos){
+                            //cout<< "AND" << searchterms.substr(0,iter) << ".\n";
+                            res=res->NOT(dictionary->query(notterms.substr(0, iter)));
+                            notterms.erase(0, iter+1);
+                            iter=searchterms.find(' ');
+                        }
                     }
+
+                    res->display();
 
 
                 }else{
@@ -209,6 +226,7 @@ int main(int argc, char* argv[])
                 andflag=false;
                 orflag=false;
                 notflag=false;
+                andorflag=false;
             }catch( exception& e){
                 cout<< "Error Thrown: \n";
                 cout << e.what();
@@ -219,18 +237,18 @@ int main(int argc, char* argv[])
             do{
 		//update dictionary that parser uses
 		cout<<"Would you like to enter a new document, or parse the WikiBooks?\n 1. WikiBooks\n 2. New File \n" << endl;
-		cin<< keepparsing; //reutilization of variable, maybe changed if conflict
+        cin >> keepparsing; //reutilization of variable, maybe changed if conflict
 		if(keepparsing == '1')
 		Parser entry(dictionary);
 		else if (keepparsing =='2')
 		{
 		cout << "Please enter the filename to be parsed: ";
-		cin keepparsing;
-		Parser entry(dictionary, keepparsing);
+        cin >> keepparsing;
+        //Parser entry(dictionary, keepparsing);
 		}
 		else{
 		cout << "Invalid input, please enter 1 for Wikibooks or 2 for New File: ";	
-		cin keepparsing;
+        cin >> keepparsing;
 		//todo: turn this into a function to allow recalling
 		}
 		//WikiDumps or other file
@@ -259,12 +277,22 @@ int main(int argc, char* argv[])
                 cout << "\n\n\n\n______________________________________________________________\n";
                 cout << "\n\n*-*-*Hash Table Mode Disabled. Implementation not complete.*-*-*\n\n";
                 cout << "\n______________________________________________________________\n";
+
+                if(false)
+                    cout << "▄██████████████▄▐█▄▄▄▄█▌\n"
+                         << "██████▌▄▌▄▐▐▌███▌▀▀██▀▀\n"
+                         << "████▄█▌▄▌▄▐▐▌▀███▄▄█▌\n"
+                         << "▄▄▄▄▄██████████████▀\n";
             }
             break;
 
         case 5://Stress Test Mode
             if(advancedmenu){
-
+                if(false)
+                    cout << "▄██████████████▄▐█▄▄▄▄█▌\n"
+                         << "██████▌▄▌▄▐▐▌███▌▀▀██▀▀\n"
+                         << "████▄█▌▄▌▄▐▐▌▀███▄▄█▌\n"
+                         << "▄▄▄▄▄██████████████▀\n";
             }
             break;
         case 6://Clear All Documents -Done
