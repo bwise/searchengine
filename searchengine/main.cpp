@@ -107,6 +107,21 @@ int main(int argc, char* argv[])
         case 2://Parse
             do{
 		//update dictionary that parser uses
+		cout<<"Would you like to enter a new document, or parse the WikiBooks?\n 1. WikiBooks\n 2. New File \n" << endl;
+		cin<< keepparsing; //reutilization of variable, maybe changed if conflict
+		if(keepparsing == '1')
+		Parser entry(dictionary);
+		else if (keepparsing =='2')
+		{
+		cout << "Please enter the filename to be parsed: ";
+		cin keepparsing;
+		Parser entry(dictionary, keepparsing);
+		}
+		else{
+		cout << "Invalid input, please enter 1 for Wikibooks or 2 for New File: ";	
+		cin keepparsing;
+		//todo: turn this into a function to allow recalling
+		}
 		//WikiDumps or other file
 		//Parse -> dic.addWord( key/word , filename )
 		
