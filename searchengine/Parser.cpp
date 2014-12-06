@@ -92,65 +92,72 @@ void Parser::parseMain(std::string passIn)
 	
 	for (unsigned int x = 0; x < files.size(); x++)
 	{
-		//std::cout << "Entered for file.size() loop" << std::endl;
-		filepath = dir + "/" + files[x];
+        try{
+            //std::cout << "Entered for file.size() loop" << std::endl;
+            filepath = dir + "/" + files[x];
 
-			//read words from the XML base file
-			std::stringstream contents;
-			theFile.open(filepath.c_str());
-			if(!theFile.is_open()){
-				std::cout << "ERROR OPENING FILE" << std::endl;
-			}
-			contents << theFile.rdbuf();
-			std::string xml_contents = contents.str();
-			std::vector<char> buffer(xml_contents.begin(),xml_contents.end()); //grabs the file names from getDir
-			buffer.push_back('\0');	
-		//	for(int x = 0; x < buffer.size(); x++)
-		//		std::cout << buffer[x];
-		//	std::cout << std::endl;
-
-			doc.parse<parse_declaration_node | parse_no_data_nodes>(&buffer[0]);//The doc object should now contain the contents of the XML.
-
-			//We begin to read through the doc object to find information we want
-
-			mediaWikiNode = doc.first_node("mediawiki");
-			//std::cout << "Mediawiki" <<std::endl;
-			//now find a page
-			pageNode = mediaWikiNode->first_node("page");
-			//std::cout << "Page" << std::endl;
-
-			xml_node<>* element;
-			while (pageNode != NULL)
-			{
-                try{
-                    //get the title of the page
-                    element = pageNode->first_node("title");
-                    //std::cout<< "title" << std::endl;
-                    title = element->value();
-                    //std::cout << "\t" << title << std:: endl;
-                    //std::cout << "check inside pageNode is: " << check << std::endl;
-
-                    id = element->next_sibling("revision")->first_node("contributor")->first_node("id")->value();
-                //	std::cout << "revision/id" << std::endl;
-
-                    author = element->next_sibling("revision")->first_node("contributor")->first_node("username")->value();
-                    text = element->next_sibling("revision")->first_node("text")->value();
-                    sha1 = element->next_sibling("revision")->first_node("sha1")->value();
-                    concat = sha1 + " " +  id;
-                    //tokenize
-                    tokenize(text, concat);
-
-                    pageNode = pageNode->next_sibling("page");
-                }catch(exception& e){
-                    cout<< "Error Thrown: \n";
-                    cout << e.what();
-                    cout << "\n";
+                //read words from the XML base file
+                std::stringstream contents;
+                theFile.open(filepath.c_str());
+                if(!theFile.is_open()){
+                    std::cout << "ERROR OPENING FILE" << std::endl;
                 }
-			}
-			
-		theFile.close();
-		theFile.clear();
-	}
+                contents << theFile.rdbuf();
+                std::string xml_contents = contents.str();
+                std::vector<char> buffer(xml_contents.begin(),xml_contents.end()); //grabs the file names from getDir
+                buffer.push_back('\0');
+            //	for(int x = 0; x < buffer.size(); x++)
+            //		std::cout << buffer[x];
+            //	std::cout << std::endl;
+
+                doc.parse<parse_declaration_node | parse_no_data_nodes>(&buffer[0]);//The doc object should now contain the contents of the XML.
+
+                //We begin to read through the doc object to find information we want
+
+                mediaWikiNode = doc.first_node("mediawiki");
+                //std::cout << "Mediawiki" <<std::endl;
+                //now find a page
+                pageNode = mediaWikiNode->first_node("page");
+                //std::cout << "Page" << std::endl;
+
+                xml_node<>* element;
+                while (pageNode != NULL)
+                {
+                    try{
+                        //get the title of the page
+                        element = pageNode->first_node("title");
+                        //std::cout<< "title" << std::endl;
+                        title = element->value();
+                        //std::cout << "\t" << title << std:: endl;
+                        //std::cout << "check inside pageNode is: " << check << std::endl;
+
+                        id = element->next_sibling("revision")->first_node("contributor")->first_node("id")->value();
+                    //	std::cout << "revision/id" << std::endl;
+
+                        author = element->next_sibling("revision")->first_node("contributor")->first_node("username")->value();
+                        text = element->next_sibling("revision")->first_node("text")->value();
+                        sha1 = element->next_sibling("revision")->first_node("sha1")->value();
+                        concat = sha1 + " " +  id;
+                        //tokenize
+                        tokenize(text, concat);
+
+                        pageNode = pageNode->next_sibling("page");
+                    }catch(exception & e){
+                        cout<< "Error Thrown: \n";
+                        cout << e.what();
+                        cout << "\n";
+                    }
+                }
+
+            theFile.close();
+            theFile.clear();
+
+        }catch(exception & e){
+            cout<< "Error Thrown: \n";
+            cout << e.what();
+            cout << "\n";
+        }
+    }
 }
 
 bool Parser::tokenize(std::string& text,std::string& id)
