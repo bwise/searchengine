@@ -42,7 +42,7 @@ Dictionary::~Dictionary(){
 
 results * Dictionary::query(string a){
     //cout << "a";
-    if(words->search(a)!=NULL)
+    if(words->search(a.)!=NULL)
         return words->search(a)->returnresults();
     else{
         cout << "Word not found: " << a << ". Continuing.";
