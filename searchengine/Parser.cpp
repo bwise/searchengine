@@ -102,9 +102,9 @@ void Parser::parseMain(std::string passIn)
 			std::string xml_contents = contents.str();
 			std::vector<char> buffer(xml_contents.begin(),xml_contents.end()); //grabs the file names from getDir
 			buffer.push_back('\0');	
-			for(int x = 0; x < buffer.size(); x++)
-				std::cout << buffer[x];
-			std::cout << std::endl;
+		//	for(int x = 0; x < buffer.size(); x++)
+		//		std::cout << buffer[x];
+		//	std::cout << std::endl;
 
 			doc.parse<parse_declaration_node | parse_no_data_nodes>(&buffer[0]);//The doc object should now contain the contents of the XML.
 
@@ -127,7 +127,7 @@ void Parser::parseMain(std::string passIn)
 				//std::cout << "check inside pageNode is: " << check << std::endl;
 
 				id = element->next_sibling("revision")->first_node("contributor")->first_node("id")->value();
-				std::cout << "revision/id" << std::endl;
+			//	std::cout << "revision/id" << std::endl;
 
 				author = element->next_sibling("revision")->first_node("contributor")->first_node("username")->value();
 				text = element->next_sibling("revision")->first_node("text")->value();				
