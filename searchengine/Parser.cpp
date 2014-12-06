@@ -119,24 +119,30 @@ void Parser::parseMain(std::string passIn)
 			xml_node<>* element;
 			while (pageNode != NULL)
 			{
-				//get the title of the page
-				element = pageNode->first_node("title");
-				//std::cout<< "title" << std::endl;
-				title = element->value();
-				//std::cout << "\t" << title << std:: endl;
-				//std::cout << "check inside pageNode is: " << check << std::endl;
+                try{
+                    //get the title of the page
+                    element = pageNode->first_node("title");
+                    //std::cout<< "title" << std::endl;
+                    title = element->value();
+                    //std::cout << "\t" << title << std:: endl;
+                    //std::cout << "check inside pageNode is: " << check << std::endl;
 
-				id = element->next_sibling("revision")->first_node("contributor")->first_node("id")->value();
-			//	std::cout << "revision/id" << std::endl;
+                    id = element->next_sibling("revision")->first_node("contributor")->first_node("id")->value();
+                //	std::cout << "revision/id" << std::endl;
 
-				author = element->next_sibling("revision")->first_node("contributor")->first_node("username")->value();
-				text = element->next_sibling("revision")->first_node("text")->value();				
-				sha1 = element->next_sibling("revision")->first_node("sha1")->value();	
-				concat = sha1 + " " +  id; 
-				//tokenize
-				tokenize(text, concat);
-				
-				pageNode = pageNode->next_sibling("page");
+                    author = element->next_sibling("revision")->first_node("contributor")->first_node("username")->value();
+                    text = element->next_sibling("revision")->first_node("text")->value();
+                    sha1 = element->next_sibling("revision")->first_node("sha1")->value();
+                    concat = sha1 + " " +  id;
+                    //tokenize
+                    tokenize(text, concat);
+
+                    pageNode = pageNode->next_sibling("page");
+                }catch(exception& e){
+                    cout<< "Error Thrown: \n";
+                    cout << e.what();
+                    cout << "\n";
+                }
 			}
 			
 		theFile.close();
