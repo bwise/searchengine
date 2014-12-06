@@ -128,15 +128,25 @@ void Parser::parseMain(std::string passIn)
                         //std::cout << "\t" << title << std:: endl;
                         //std::cout << "check inside pageNode is: " << check << std::endl;
 
-                        id = element->next_sibling("revision")->first_node("contributor")->first_node("id")->value();
+                        //id = element->next_sibling("revision")->first_node("contributor")->first_node("id")->value();
                     //	std::cout << "revision/id" << std::endl;
 
-                        author = element->next_sibling("revision")->first_node("contributor")->first_node("username")->value();
+                        //author = element->next_sibling("revision")->first_node("contributor")->first_node("username")->value();
                         text = element->next_sibling("revision")->first_node("text")->value();
                         sha1 = element->next_sibling("revision")->first_node("sha1")->value();
-                        concat = sha1 + " " +  id;
+                        concat = sha1 + "-" +  title + ".txt";
                         //tokenize
                         tokenize(text, concat);
+
+                        //Write to file
+
+                        ofstream ofile;
+                        ofile.open(concat);
+                        ofile << concat << "\n";
+                        ofile << text;
+                        ofile.close();
+
+
 
                         pageNode = pageNode->next_sibling("page");
                     }catch(exception & e){
@@ -154,7 +164,9 @@ void Parser::parseMain(std::string passIn)
             cout << e.what();
             cout << "\n";
         }
+
     }
+    //cout << "A";
 }
 
 bool Parser::tokenize(std::string& text,std::string& id)

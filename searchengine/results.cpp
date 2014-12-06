@@ -155,5 +155,17 @@ results* results::display(){
 }
 
 void results::openresult(int c){
-    cout << "openresult needs to be written\n";
+
+    ifstream ifile(frstruct[c].fr->getName());
+
+    string line;
+
+    if(ifile.is_open()){
+        while(getline(ifile,line))
+            cout << line << '\n';
+        ifile.close();
+    }
+    else
+        cout << "Unable to open File.\n";
+
 }
