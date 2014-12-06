@@ -25,10 +25,14 @@ class Parser
 {	public:
 	Parser(Dictionary*);
 	private:
-	void parseMain();
+	//void parseMain();
+	void parseMain(std::string);
 	int getDir(std::string dir, std::vector<std::string> &files);
 	bool tokenize(std::string&,std::string&);
 	std::string rm_spec_char(std::string&);
+	void parseMenu();
+
+
 
 	Dictionary* dic;
 };

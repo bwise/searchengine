@@ -5,21 +5,13 @@
 
 using namespace rapidxml;
 
-//int main()
-//{
-//	std::cout << "Entered main" << std::endl;
-//
-//	//	Parser parseEntry();//create a parser object; 
-//	Parser* parseEntry = new Parser();
-//	//	parseEntry->parseMain();
-//	return 0;
-//}
 
 
 Parser::Parser(Dictionary* dicP)
-{	dic = dicP;
-	std::cout << "created object" << std::endl;
-	parseMain();
+{	
+	dic = dicP;
+	parseMenu();
+
 }
 
 
@@ -51,14 +43,14 @@ int Parser::getDir(std::string dir, std::vector<std::string> &files)
 }
 
 
-void Parser::parseMain()
+void Parser::parseMain(std::string passIn)
 {
 	std::cout << "Parsing main" << std::endl;
 	//file<> xmlFile(fileName); //denotes an XML file; potentially unnecessary?
 	std::cout << "Declaring variables" << std::endl;
 	xml_document<> doc;
 
-	std::string dir = std::string("WikiDump");
+	std::string dir = std::string(passIn);//std::string dir = std::string("WikiDump");
 	std::vector<std::string> files = std::vector<std::string>();
 	std::string line = "";
 	//declaration of strings to compare: XML tags expected values
@@ -152,4 +144,29 @@ char chars[]=".,!()123456890{}'<>:/{}_|=+;-`~";
 for(unsigned int i=0; i<33; i++)
 	text.erase(std::remove(text.begin(),text.end(),chars[i]),text.end());
 return text;
+}
+
+
+void Parser::parseMenu()
+{
+	std::string userIn = ' ';
+	std::cout << "Would you like to enter a new document, or parse the WikiBooks?\n 1. WikiBooks\n 2. New File \n" << std::endl;
+	std::cin >> userIn;
+	do{
+		if (userIn == '1')
+		{
+			parseMain("WikiDump");
+			return;
+		}
+		else if (keepparsing == '2')
+		{
+			std::cout << "Please enter the filename to be parsed: ";
+			std::cin >> userIn;
+			parseMain(userIn);
+			return;
+		}
+		else{
+			std::cout << "Invalid input, please enter 1 for Wikibooks or 2 for New File.";
+		}
+	} while (userIn != '1' || userIn != '2');
 }
