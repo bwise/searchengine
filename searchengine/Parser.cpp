@@ -159,16 +159,16 @@ return text;
 
 void Parser::parseMenu()
 {
-	std::string userIn = ' ';
+	std::string userIn ="";
 	std::cout << "Would you like to enter a new document, or parse the WikiBooks?\n 1. WikiBooks\n 2. New File \n" << std::endl;
 	std::cin >> userIn;
 	
-		if (userIn == '1')
+		if (userIn == "1")
 		{
 			parseMain("WikiDump");
 			return;
 		}
-		else if (userIn == '2')
+		else if (userIn == "2")
 		{
 			std::cout << "Please enter the filename to be parsed: ";
 			std::cin >> userIn;

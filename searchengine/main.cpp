@@ -241,7 +241,7 @@ int main(int argc, char* argv[])
 				Parser entry(dictionary);
 				else
 				{
-					dictionary = new dictionary(); // do we need to pass this AVL node mode?
+					Dictionary* dictionary = new Dictionary(avlmode); // do we need to pass this AVL node mode?
 					Parser entry(dictionary);
 				}
 		//Parse -> dic.addWord( key/word , filename )
@@ -289,7 +289,8 @@ int main(int argc, char* argv[])
             break;
         case 6://Clear All Documents -Done
             if(advancedmenu){
-                cout <<"            .-\"\"\"\"\"-.\n           /         \\\n  .-.      |  _   _  |      .-.\n (_. '._   | |_\ /_| |   _.' ._)\n    '-._'-.(_   A   _).-'_.-'\n        '-._| _____ |_.-'\n       _.-\'_\`\"\"\"\"\"`/_\'-._\n  .-.-\'_.-\'  `-----\'  \'-._\'-.-.\n (,_.\'`                   `\'._,)\n";
+             //   cout <<"            .-\"\"\"\"\"-.\n           /         \\\n  .-.      |  _   _  |      .-.\n (_. '._   | |_\ /_| |   _.' ._)\n    '-._'-.(_   A   _).-'_.-'\n        '-._| _____ |_.-'\n       _.-\'_\`\"\"\"\"\"`/_\'-._\n  .-.-\'_.-\'  `-----\'  \'-._\'-.-.\n (,_.\'`                   `\'._,)\n";
+
                 cout <<"\n\nAre you sure you want to clear the index? (Y/n) \nResponse: ";
                 cin >> clearDocs;
                 if(clearDocs=='Y'){
