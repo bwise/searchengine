@@ -136,7 +136,7 @@ void Parser::parseMain(std::string passIn)
                         sha1 = element->next_sibling("revision")->first_node("sha1")->value();
                         concat = sha1 + "-" +  title + ".txt";
                         //tokenize
-                        tokenize(text, concat);
+
 
                         //Write to file
 
@@ -146,7 +146,7 @@ void Parser::parseMain(std::string passIn)
                         ofile << text;
                         ofile.close();
 
-
+                        tokenize(text, concat);
 
                         pageNode = pageNode->next_sibling("page");
                     }catch(exception & e){
