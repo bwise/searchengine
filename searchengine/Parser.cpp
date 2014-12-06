@@ -50,16 +50,16 @@ int Parser::getDir(std::string dir, std::vector<std::string> &files)
 		files.push_back(std::string(dirp->d_name));
 	}
 	closedir(dp);
-	std::cout << "leaving getdir" << std::endl;
+	//std::cout << "leaving getdir" << std::endl;
 	return 0;
 }
 
 
 void Parser::parseMain(std::string passIn)
 {
-	std::cout << "Parsing main" << std::endl;
+	//std::cout << "Parsing main" << std::endl;
 	//file<> xmlFile(fileName); //denotes an XML file; potentially unnecessary?
-	std::cout << "Declaring variables" << std::endl;
+	//std::cout << "Declaring variables" << std::endl;
 	xml_document<> doc;
 
 	std::string dir = std::string(passIn);//std::string dir = std::string("WikiDump");
@@ -89,14 +89,14 @@ void Parser::parseMain(std::string passIn)
 	
 	for (unsigned int x = 0; x < files.size(); x++)
 	{
-		std::cout << "Entered for file.size() loop" << std::endl;
+		//std::cout << "Entered for file.size() loop" << std::endl;
 		filepath = dir + "/" + files[x];
 
 			//read words from the XML base file
 			std::stringstream contents;
 			theFile.open(filepath.c_str());
 			if(!theFile.is_open()){
-				std::cout << "ERROR OPENING FILE BRUH" << std::endl;
+				std::cout << "ERROR OPENING FILE" << std::endl;
 			}
 			contents << theFile.rdbuf();
 			std::string xml_contents = contents.str();
@@ -111,19 +111,19 @@ void Parser::parseMain(std::string passIn)
 			//We begin to read through the doc object to find information we want
 
 			mediaWikiNode = doc.first_node("mediawiki");
-			std::cout << "Mediawiki" <<std::endl;
+			//std::cout << "Mediawiki" <<std::endl;
 			//now find a page
 			pageNode = mediaWikiNode->first_node("page");
-			std::cout << "Page" << std::endl;
+			//std::cout << "Page" << std::endl;
 
 			xml_node<>* element;
 			while (pageNode != NULL)
 			{
 				//get the title of the page
 				element = pageNode->first_node("title");
-				std::cout<< "title" << std::endl;
+				//std::cout<< "title" << std::endl;
 				title = element->value();
-				std::cout << "\t" << title << std:: endl;
+				//std::cout << "\t" << title << std:: endl;
 				//std::cout << "check inside pageNode is: " << check << std::endl;
 
 				id = element->next_sibling("revision")->first_node("contributor")->first_node("id")->value();
@@ -146,14 +146,16 @@ void Parser::parseMain(std::string passIn)
 
 bool Parser::tokenize(std::string& text,std::string& id)
 {
+std::vector<std::string> token;
+strtk::parse(text, " ", token);
 
-text = rm_spec_char(text); //strips special chars
-strtk::std_string::token_list_type token_list; 
-text = strtk::split (" ",text,std::back_inserter(token_list));//split the large string into single words
-//std::vector<std::string> token;
-Porter2Stemmer::stem(text);//stem the words down
+for(int i=0; i< token.size(); i++)
+{
+Porter2Stemmer::stem(token[i]);//stem the words down
+text = rm_spec_char(token[i]);
+std::transform(text.begin(),text.end(),text.begin(), ::tolower);
 dic->addWord(text,id); //add the words to the dictionary
-
+}
 }
 
 std::string Parser::rm_spec_char(std::string& text)

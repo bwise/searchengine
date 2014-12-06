@@ -42,8 +42,10 @@ Dictionary::~Dictionary(){
 
 results * Dictionary::query(string a){
     //cout << "a";
-    if(words->search(a)!=NULL)
-        return words->search(a)->returnresults();
+    if(words->search(a)!=NULL){
+	std::transform(a.begin(),a.end(),a.begin(), ::tolower);
+	return words->search(a)->returnresults();
+	}
     else{
         cout << "Word not found: " << a << ". Continuing.";
         return NULL;
