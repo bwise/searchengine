@@ -1,7 +1,17 @@
-#include <algorithm>
+/* 
+Author: Kristofor Horst
+  Date: Fall 2014, Nov 15 - Dec 8
+  File: Parser.cpp
+  Pair with Parser.h
+
+  This is intended to be an XML parser utilizing the RapidXML parser
+  in conjunction with the Porter2Stemmer platform.  
+*/
+
+
 #include "porter2_stemmer.h"
 #include "Parser.h"
-#include <vector>
+
 
 using namespace rapidxml;
 
@@ -152,13 +162,13 @@ void Parser::parseMenu()
 	std::string userIn = ' ';
 	std::cout << "Would you like to enter a new document, or parse the WikiBooks?\n 1. WikiBooks\n 2. New File \n" << std::endl;
 	std::cin >> userIn;
-	do{
+	
 		if (userIn == '1')
 		{
 			parseMain("WikiDump");
 			return;
 		}
-		else if (keepparsing == '2')
+		else if (userIn == '2')
 		{
 			std::cout << "Please enter the filename to be parsed: ";
 			std::cin >> userIn;
@@ -166,7 +176,7 @@ void Parser::parseMenu()
 			return;
 		}
 		else{
-			std::cout << "Invalid input, please enter 1 for Wikibooks or 2 for New File.";
+			std::cout << "Invalid input, please enter 1 for Wikibooks or 2 for New File.\n";
+			parseMenu();
 		}
-	} while (userIn != '1' || userIn != '2');
-}
+	}
