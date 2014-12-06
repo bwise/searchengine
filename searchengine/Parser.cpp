@@ -15,6 +15,9 @@ Author: Kristofor Horst
 #define strtk_no_tr1_or_boost
 #include "strtk.hpp"
 
+#include <exception>
+
+
 using namespace rapidxml;
 
 
