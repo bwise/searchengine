@@ -4,6 +4,7 @@
 #include <vector>
 #include "filerecord.h"
 #include <iomanip>
+#include <fstream>
 #include <algorithm>
 
 class FileRecord;
