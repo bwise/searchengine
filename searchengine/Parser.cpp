@@ -12,12 +12,14 @@ Author: Kristofor Horst
 #include "porter2_stemmer.h"
 #include "Parser.h"
 
+#define strtk_no_tr1_or_boost
+#include "strtk.hpp"
 
 using namespace rapidxml;
 
 
 
-Parser::Parser(Dictionary* dicP)
+Parser::Parser(Dictionary*& dicP)
 {	
 	dic = dicP;
 	parseMenu();
@@ -72,6 +74,8 @@ void Parser::parseMain(std::string passIn)
 	std::string id = "id";
 	std::string text = "text";
 	std::string author = "author";
+	std::string sha1 = "sha1";
+	std::string concat = "";
 	std::ifstream theFile;
 
 	std::string filepath = " ";
@@ -127,9 +131,10 @@ void Parser::parseMain(std::string passIn)
 
 				author = element->next_sibling("revision")->first_node("contributor")->first_node("username")->value();
 				text = element->next_sibling("revision")->first_node("text")->value();				
-			
+				sha1 = element->next_sibling("revision")->first_node("sha1")->value();	
+				concat = sha1 + " " +  id; 
 				//tokenize
-				tokenize(text, id);
+				tokenize(text, concat);
 				
 				pageNode = pageNode->next_sibling("page");
 			}
@@ -141,10 +146,13 @@ void Parser::parseMain(std::string passIn)
 
 bool Parser::tokenize(std::string& text,std::string& id)
 {
-text = rm_spec_char(text);
+
+text = rm_spec_char(text); //strips special chars
+strtk::std_string::token_list_type token_list; 
+text = strtk::split (" ",text,std::back_inserter(token_list));//split the large string into single words
 //std::vector<std::string> token;
-Porter2Stemmer::stem(text);
-dic->addWord(text,id);
+Porter2Stemmer::stem(text);//stem the words down
+dic->addWord(text,id); //add the words to the dictionary
 
 }
 
