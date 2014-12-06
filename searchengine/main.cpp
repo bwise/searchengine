@@ -155,8 +155,11 @@ int main(int argc, char* argv[])
 
                         iter=searchterms.find(' ');
 
+
                         //cout<< "AND" << searchterms.substr(0,iter) << ".\n";
-                        res=dictionary->query(searchterms.substr(0, iter));
+                        string temp=searchterms.substr(0, iter);
+                        Porter2Stemmer::stem(temp);
+                        res=dictionary->query(temp);
                         searchterms.erase(0, iter+1);
                         iter=searchterms.find(' ');
 
@@ -166,7 +169,9 @@ int main(int argc, char* argv[])
 
                         while(iter!=string::npos){
                             //cout<< "AND" << searchterms.substr(0,iter) << ".\n";
-                            res=res->AND(dictionary->query(searchterms.substr(0, iter)));
+                            string temp=searchterms.substr(0, iter);
+                            Porter2Stemmer::stem(temp);
+                            res=res->AND(dictionary->query(temp));
                             searchterms.erase(0, iter+1);
                             iter=searchterms.find(' ');
                         }
@@ -178,13 +183,17 @@ int main(int argc, char* argv[])
                         iter=searchterms.find(' ');
 
                         //cout<< "OR" << searchterms.substr(0,iter) << ".\n";
-                        res=dictionary->query(searchterms.substr(0, iter));
+                        string temp=searchterms.substr(0, iter);
+                        Porter2Stemmer::stem(temp);
+                        res=dictionary->query(temp);
                         searchterms.erase(0, iter+1);
                         iter=searchterms.find(' ');
 
                         while(iter!=string::npos){
                             //cout<< "OR" << searchterms.substr(0,iter) << ".\n";
-                            res=res->OR(dictionary->query(searchterms.substr(0, iter)));
+                            string temp=searchterms.substr(0, iter);
+                            Porter2Stemmer::stem(temp);
+                            res=res->OR(dictionary->query(temp));
                             searchterms.erase(0, iter+1);
                             iter=searchterms.find(' ');
                         }
@@ -198,7 +207,9 @@ int main(int argc, char* argv[])
                         iter=notterms.find(' ');
 
                         //cout<< "AND" << searchterms.substr(0,iter) << ".\n";
-                        res=res->NOT(dictionary->query(notterms.substr(0, iter)));
+                        string temp=notterms.substr(0, iter);
+                        Porter2Stemmer::stem(temp);
+                        res=res->NOT(dictionary->query(temp));
                         notterms.erase(0, iter+1);
                         iter=notterms.find(' ');
 
@@ -208,7 +219,9 @@ int main(int argc, char* argv[])
 
                         while(iter!=string::npos){
                             //cout<< "AND" << searchterms.substr(0,iter) << ".\n";
-                            res=res->NOT(dictionary->query(notterms.substr(0, iter)));
+                            string temp=notterms.substr(0, iter);
+                            Porter2Stemmer::stem(temp);
+                            res=res->NOT(dictionary->query(temp));
                             notterms.erase(0, iter+1);
                             iter=searchterms.find(' ');
                         }

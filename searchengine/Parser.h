@@ -38,6 +38,7 @@ in conjunction with the Porter2Stemmer platform.
 class Parser
 {	
 public:
+
 	Parser(Dictionary*&);
 	
 private:
