@@ -1,0 +1,105 @@
+\hypertarget{classstrtk_1_1binary_1_1writer}{\section{strtk\-:\-:binary\-:\-:writer Class Reference}
+\label{classstrtk_1_1binary_1_1writer}\index{strtk\-::binary\-::writer@{strtk\-::binary\-::writer}}
+}
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum {\bfseries padding\-\_\-mode} \{ {\bfseries right\-\_\-padding} = 0, 
+{\bfseries left\-\_\-padding} = 1
+ \}
+\item 
+\hypertarget{classstrtk_1_1binary_1_1writer_affcbbae82347870c84633b33876eab31}{typedef unsigned int {\bfseries uint32\-\_\-t}}\label{classstrtk_1_1binary_1_1writer_affcbbae82347870c84633b33876eab31}
+
+\item 
+\hypertarget{classstrtk_1_1binary_1_1writer_aa53599b5c29881695412776541247141}{typedef unsigned short {\bfseries uint16\-\_\-t}}\label{classstrtk_1_1binary_1_1writer_aa53599b5c29881695412776541247141}
+
+\item 
+\hypertarget{classstrtk_1_1binary_1_1writer_abda9c0135d40db5a03a40b2c64c32e77}{typedef unsigned char {\bfseries uint8\-\_\-t}}\label{classstrtk_1_1binary_1_1writer_abda9c0135d40db5a03a40b2c64c32e77}
+
+\item 
+\hypertarget{classstrtk_1_1binary_1_1writer_a63de13252ee0febc8e5bf808cd9f5d99}{typedef unsigned long long int {\bfseries uint64\-\_\-t}}\label{classstrtk_1_1binary_1_1writer_a63de13252ee0febc8e5bf808cd9f5d99}
+
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classstrtk_1_1binary_1_1writer_a0d2d0dfabf63612ba219f96c1b07acd1}{{\footnotesize template$<$typename T $>$ }\\{\bfseries writer} (T $\ast$buffer, const std\-::size\-\_\-t \&buffer\-\_\-length)}\label{classstrtk_1_1binary_1_1writer_a0d2d0dfabf63612ba219f96c1b07acd1}
+
+\item 
+\hypertarget{classstrtk_1_1binary_1_1writer_aa7592a5122aacfd1d91b1241f01265cd}{bool {\bfseries operator!} () const }\label{classstrtk_1_1binary_1_1writer_aa7592a5122aacfd1d91b1241f01265cd}
+
+\item 
+\hypertarget{classstrtk_1_1binary_1_1writer_ad46f5bbb6ca3c7d367ce40360c88e228}{void {\bfseries reset} (const bool clear\-\_\-buffer=false)}\label{classstrtk_1_1binary_1_1writer_ad46f5bbb6ca3c7d367ce40360c88e228}
+
+\item 
+\hypertarget{classstrtk_1_1binary_1_1writer_a577e052fb9656e28264f56baba246dd9}{std\-::size\-\_\-t {\bfseries position} () const }\label{classstrtk_1_1binary_1_1writer_a577e052fb9656e28264f56baba246dd9}
+
+\item 
+\hypertarget{classstrtk_1_1binary_1_1writer_a2dcf6a96a8a7b0e43818f3ef2d9070db}{const char $\ast$ {\bfseries position\-\_\-ptr} () const }\label{classstrtk_1_1binary_1_1writer_a2dcf6a96a8a7b0e43818f3ef2d9070db}
+
+\item 
+\hypertarget{classstrtk_1_1binary_1_1writer_a78543f9dfff6ed3e5720cf66eb3dd73b}{std\-::size\-\_\-t {\bfseries amount\-\_\-written} () const }\label{classstrtk_1_1binary_1_1writer_a78543f9dfff6ed3e5720cf66eb3dd73b}
+
+\item 
+\hypertarget{classstrtk_1_1binary_1_1writer_a15507fb7f155fc8a08e2595f0a4136e5}{void {\bfseries clear} ()}\label{classstrtk_1_1binary_1_1writer_a15507fb7f155fc8a08e2595f0a4136e5}
+
+\item 
+\hypertarget{classstrtk_1_1binary_1_1writer_a47341899c73ddff995123ebce695653f}{{\footnotesize template$<$typename T , std\-::size\-\_\-t N$>$ }\\bool {\bfseries operator()} (const T(\&data)\mbox{[}N\mbox{]}, const bool write\-\_\-length=false)}\label{classstrtk_1_1binary_1_1writer_a47341899c73ddff995123ebce695653f}
+
+\item 
+\hypertarget{classstrtk_1_1binary_1_1writer_aa7d1f1a34bf641ea98b581a5f9974f8c}{{\footnotesize template$<$typename T $>$ }\\bool {\bfseries operator()} (const T $\ast$data, const uint32\-\_\-t \&length, const bool write\-\_\-length=true)}\label{classstrtk_1_1binary_1_1writer_aa7d1f1a34bf641ea98b581a5f9974f8c}
+
+\item 
+\hypertarget{classstrtk_1_1binary_1_1writer_a51d6ed607d4a4f1dde3eb16a8cefd46d}{{\footnotesize template$<$typename T $>$ }\\bool {\bfseries operator()} (const T $\ast$data, const uint64\-\_\-t \&length, const bool write\-\_\-length=true)}\label{classstrtk_1_1binary_1_1writer_a51d6ed607d4a4f1dde3eb16a8cefd46d}
+
+\item 
+\hypertarget{classstrtk_1_1binary_1_1writer_a9da364b29678f9412c64c5aa4493f69e}{{\footnotesize template$<$typename T $>$ }\\bool {\bfseries operator()} (const T $\ast$data, const uint16\-\_\-t \&length, const bool write\-\_\-length=true)}\label{classstrtk_1_1binary_1_1writer_a9da364b29678f9412c64c5aa4493f69e}
+
+\item 
+\hypertarget{classstrtk_1_1binary_1_1writer_af2f8c46af202989375749b032f7bfe71}{{\footnotesize template$<$typename T $>$ }\\bool {\bfseries operator()} (const T $\ast$data, const uint8\-\_\-t \&length, const bool write\-\_\-length=true)}\label{classstrtk_1_1binary_1_1writer_af2f8c46af202989375749b032f7bfe71}
+
+\item 
+\hypertarget{classstrtk_1_1binary_1_1writer_a22d7b05dee0d5d01a0b434d0b9ff00d0}{{\footnotesize template$<$typename T1 , typename T2 $>$ }\\bool {\bfseries operator()} (const std\-::pair$<$ T1, T2 $>$ \&p)}\label{classstrtk_1_1binary_1_1writer_a22d7b05dee0d5d01a0b434d0b9ff00d0}
+
+\item 
+\hypertarget{classstrtk_1_1binary_1_1writer_a26a65d318dfdf850df206fd61f010c68}{bool {\bfseries operator()} (const std\-::string \&input)}\label{classstrtk_1_1binary_1_1writer_a26a65d318dfdf850df206fd61f010c68}
+
+\item 
+\hypertarget{classstrtk_1_1binary_1_1writer_a6b9a32820d91f5aa66354047f45c755f}{{\footnotesize template$<$typename T , typename Allocator , template$<$ typename, typename $>$ class Sequence$>$ }\\bool {\bfseries operator()} (const Sequence$<$ T, Allocator $>$ \&seq)}\label{classstrtk_1_1binary_1_1writer_a6b9a32820d91f5aa66354047f45c755f}
+
+\item 
+\hypertarget{classstrtk_1_1binary_1_1writer_a8f310903c97213fb229014fcdfd2b3bf}{{\footnotesize template$<$typename T , typename Allocator $>$ }\\bool {\bfseries operator()} (const std\-::vector$<$ T, Allocator $>$ \&vec)}\label{classstrtk_1_1binary_1_1writer_a8f310903c97213fb229014fcdfd2b3bf}
+
+\item 
+\hypertarget{classstrtk_1_1binary_1_1writer_abd48284dcf0e79bba8289df50f091a83}{{\footnotesize template$<$typename T , typename Comparator , typename Allocator $>$ }\\bool {\bfseries operator()} (const std\-::set$<$ T, Comparator, Allocator $>$ \&set)}\label{classstrtk_1_1binary_1_1writer_abd48284dcf0e79bba8289df50f091a83}
+
+\item 
+\hypertarget{classstrtk_1_1binary_1_1writer_a44cf8772918463b7e10d116c2e86726d}{{\footnotesize template$<$typename T , typename Allocator , typename Comparator $>$ }\\bool {\bfseries operator()} (const std\-::multiset$<$ T, Allocator, Comparator $>$ \&multiset)}\label{classstrtk_1_1binary_1_1writer_a44cf8772918463b7e10d116c2e86726d}
+
+\item 
+\hypertarget{classstrtk_1_1binary_1_1writer_a75fc3f5e25a291c045fc2ba479a75ae7}{std\-::size\-\_\-t {\bfseries operator()} (std\-::ofstream \&stream)}\label{classstrtk_1_1binary_1_1writer_a75fc3f5e25a291c045fc2ba479a75ae7}
+
+\item 
+\hypertarget{classstrtk_1_1binary_1_1writer_a1c7dbf357d387c9b40b99dacf39da406}{{\footnotesize template$<$typename T $>$ }\\bool {\bfseries operator()} (const T \&input)}\label{classstrtk_1_1binary_1_1writer_a1c7dbf357d387c9b40b99dacf39da406}
+
+\item 
+\hypertarget{classstrtk_1_1binary_1_1writer_aa99deec9805faa41d854410bc629b540}{{\footnotesize template$<$typename T $>$ }\\bool {\bfseries native\-\_\-to\-\_\-be} (const T \&input)}\label{classstrtk_1_1binary_1_1writer_aa99deec9805faa41d854410bc629b540}
+
+\item 
+\hypertarget{classstrtk_1_1binary_1_1writer_ab40362fbb9555b4e5bdea77e7cba7c04}{{\footnotesize template$<$typename T $>$ }\\bool {\bfseries native\-\_\-to\-\_\-le} (const T \&input)}\label{classstrtk_1_1binary_1_1writer_ab40362fbb9555b4e5bdea77e7cba7c04}
+
+\item 
+\hypertarget{classstrtk_1_1binary_1_1writer_a3ac538292d496519733107a436cf43f6}{{\footnotesize template$<$typename T $>$ }\\bool {\bfseries operator()} (const T \&input, const std\-::size\-\_\-t \&size, const padding\-\_\-mode pmode, const char padding= ' ')}\label{classstrtk_1_1binary_1_1writer_a3ac538292d496519733107a436cf43f6}
+
+\item 
+\hypertarget{classstrtk_1_1binary_1_1writer_ac0fb8f4e4fb6f7858ca6c39e2bb5fce0}{void {\bfseries mark} ()}\label{classstrtk_1_1binary_1_1writer_ac0fb8f4e4fb6f7858ca6c39e2bb5fce0}
+
+\item 
+\hypertarget{classstrtk_1_1binary_1_1writer_a833d765385ec0f1575a78fb3d85c95bf}{bool {\bfseries reset\-\_\-to\-\_\-mark} ()}\label{classstrtk_1_1binary_1_1writer_a833d765385ec0f1575a78fb3d85c95bf}
+
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+strtk.\-hpp\end{DoxyCompactItemize}
