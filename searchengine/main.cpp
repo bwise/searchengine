@@ -54,6 +54,7 @@ int main()
 
 
         //Test Section
+        /*
         dictionary->addWord("Christina", "Chase");
         dictionary->addWord("Christina", "Chas");
         dictionary->addWord("Christina", "Chase");
@@ -66,7 +67,7 @@ int main()
         dictionary->addWord("Kris", "Chase");
 
         dictionary->calcFreq();
-
+        */
 
         while(!exit){
             string mode = avlmode?"AVL Mode\n":"Hash Table Mode\n";
@@ -107,6 +108,7 @@ int main()
                          << "\tAND <space separated search terms> : AND Search\n"
                          << "\tOR <space separated search terms> : OR Search\n"
                          << "\nOptional: NOT <space separated exclude terms> : Excludes NOT Terms\n"
+                         << "\n\nALL SEARCH TERMS MUST BE LOWERCASE.\n"
                          << "\n\nSearch: ";
 
                     getline(std::cin, trash);
@@ -159,8 +161,11 @@ int main()
 
                             //cout<< "AND" << searchterms.substr(0,iter) << ".\n";
                             string temp=searchterms.substr(0, iter);
+                            //cout << "b";
                             Porter2Stemmer::stem(temp);
+                            //cout << "c";
                             res=dictionary->query(temp);
+                            //cout << "d";
                             searchterms.erase(0, iter+1);
                             iter=searchterms.find(' ');
 
