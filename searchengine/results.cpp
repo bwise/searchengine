@@ -2,6 +2,7 @@
 
 results::results()
 {
+    //cout << "Results enstant";
     frstruct.clear();
 }
 
@@ -13,6 +14,8 @@ void results::add(FileRecord * a, double b){
 }
 
 results* results::AND(results* a){
+    //cout << "z";
+
     if(a==NULL)
         return NULL;
     if(this==NULL)
@@ -22,6 +25,8 @@ results* results::AND(results* a){
 
     for(int my=0; my<this->frstruct.size() ;my++){
         inboth=false;
+
+        //cout << "a";
 
         for(int their=0; their<a->frstruct.size(); their++ )
             if(this->frstruct[my].fr->getName()==a->frstruct[their].fr->getName()){
@@ -33,6 +38,8 @@ results* results::AND(results* a){
         if(!inboth){
             this->frstruct.erase(this->frstruct.begin()+my);
             my--;
+
+            //cout << "here";
         }
     }
     return this;

@@ -15,9 +15,16 @@ string Word::getName(){
 
 
 results * Word::returnresults(){
+
+    //cout << "RR";
     results* r = new results();
 
+    //cout << filerecords;
+    //cout << r;
+
+
     filerecords->calcFreq();
+    //cout << "CF";
 
     filerecords->returnresults(r, idf);
 
