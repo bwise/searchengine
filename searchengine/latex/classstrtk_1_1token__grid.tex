@@ -1,0 +1,242 @@
+\hypertarget{classstrtk_1_1token__grid}{\section{strtk\-:\-:token\-\_\-grid Class Reference}
+\label{classstrtk_1_1token__grid}\index{strtk\-::token\-\_\-grid@{strtk\-::token\-\_\-grid}}
+}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structstrtk_1_1token__grid_1_1options}{options}
+\item 
+class \hyperlink{classstrtk_1_1token__grid_1_1row__type}{row\-\_\-type}
+\end{DoxyCompactItemize}
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classstrtk_1_1token__grid_a3ea861ca892a621240f913d1509bb04f}{typedef const unsigned char $\ast$ {\bfseries iterator\-\_\-t}}\label{classstrtk_1_1token__grid_a3ea861ca892a621240f913d1509bb04f}
+
+\item 
+\hypertarget{classstrtk_1_1token__grid_a869b0c87afab4b1ed95232305e48cabd}{typedef unsigned int {\bfseries index\-\_\-t}}\label{classstrtk_1_1token__grid_a869b0c87afab4b1ed95232305e48cabd}
+
+\item 
+\hypertarget{classstrtk_1_1token__grid_a4538cc2894f2270234e09441dcb2a2f3}{typedef std\-::pair$<$ iterator\-\_\-t, \\*
+iterator\-\_\-t $>$ {\bfseries range\-\_\-t}}\label{classstrtk_1_1token__grid_a4538cc2894f2270234e09441dcb2a2f3}
+
+\item 
+\hypertarget{classstrtk_1_1token__grid_ad4d3c0e3c6f86f28d2392959d3d0b04d}{typedef std\-::deque$<$ range\-\_\-t $>$ {\bfseries token\-\_\-list\-\_\-t}}\label{classstrtk_1_1token__grid_ad4d3c0e3c6f86f28d2392959d3d0b04d}
+
+\item 
+\hypertarget{classstrtk_1_1token__grid_a67ca1a24eebed9a64b15c03848830c67}{typedef std\-::pair$<$ index\-\_\-t, \\*
+index\-\_\-t $>$ {\bfseries row\-\_\-index\-\_\-range\-\_\-t}}\label{classstrtk_1_1token__grid_a67ca1a24eebed9a64b15c03848830c67}
+
+\item 
+\hypertarget{classstrtk_1_1token__grid_ace491e5f0e24b2b9decfcd2e9053816e}{typedef std\-::deque\\*
+$<$ row\-\_\-index\-\_\-range\-\_\-t $>$ {\bfseries row\-\_\-index\-\_\-t}}\label{classstrtk_1_1token__grid_ace491e5f0e24b2b9decfcd2e9053816e}
+
+\item 
+\hypertarget{classstrtk_1_1token__grid_a30f043a193c65c86329cc2c998998f32}{typedef std\-::pair$<$ index\-\_\-t, \\*
+index\-\_\-t $>$ {\bfseries row\-\_\-range\-\_\-t}}\label{classstrtk_1_1token__grid_a30f043a193c65c86329cc2c998998f32}
+
+\item 
+\hypertarget{classstrtk_1_1token__grid_a2664e5f5dc5259ccd6d0347abb2b5037}{typedef std\-::pair$<$ index\-\_\-t, \\*
+index\-\_\-t $>$ {\bfseries col\-\_\-range\-\_\-t}}\label{classstrtk_1_1token__grid_a2664e5f5dc5259ccd6d0347abb2b5037}
+
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classstrtk_1_1token__grid_a5823688421812aa36cb1817d7ee58c8c}{row\-\_\-range\-\_\-t {\bfseries range} (std\-::size\-\_\-t lower\-\_\-bound, std\-::size\-\_\-t upper\-\_\-bound=std\-::numeric\-\_\-limits$<$ std\-::size\-\_\-t $>$\-::max()) const }\label{classstrtk_1_1token__grid_a5823688421812aa36cb1817d7ee58c8c}
+
+\item 
+\hypertarget{classstrtk_1_1token__grid_a798676ce4216804459982218697929c7}{{\bfseries token\-\_\-grid} (const std\-::string \&file\-\_\-name, const \hyperlink{structstrtk_1_1token__grid_1_1options}{token\-\_\-grid\-::options} \&\hyperlink{structstrtk_1_1token__grid_1_1options}{options})}\label{classstrtk_1_1token__grid_a798676ce4216804459982218697929c7}
+
+\item 
+\hypertarget{classstrtk_1_1token__grid_aa69393fb387858443368b590bea40fbb}{{\bfseries token\-\_\-grid} (const unsigned char $\ast$input\-\_\-buffer, const std\-::size\-\_\-t \&input\-\_\-buffer\-\_\-size, const \hyperlink{structstrtk_1_1token__grid_1_1options}{token\-\_\-grid\-::options} \&\hyperlink{structstrtk_1_1token__grid_1_1options}{options})}\label{classstrtk_1_1token__grid_aa69393fb387858443368b590bea40fbb}
+
+\item 
+\hypertarget{classstrtk_1_1token__grid_ae37aeff3de36a3bec9b7b0ce3d0615c0}{{\bfseries token\-\_\-grid} (const char $\ast$input\-\_\-buffer, const std\-::size\-\_\-t \&input\-\_\-buffer\-\_\-size, const \hyperlink{structstrtk_1_1token__grid_1_1options}{token\-\_\-grid\-::options} \&\hyperlink{structstrtk_1_1token__grid_1_1options}{options})}\label{classstrtk_1_1token__grid_ae37aeff3de36a3bec9b7b0ce3d0615c0}
+
+\item 
+\hypertarget{classstrtk_1_1token__grid_ac649536cbc20e0622ce9aa37b6ca49fc}{{\bfseries token\-\_\-grid} (const std\-::string \&input\-\_\-buffer, const std\-::size\-\_\-t \&input\-\_\-buffer\-\_\-size, const \hyperlink{structstrtk_1_1token__grid_1_1options}{token\-\_\-grid\-::options} \&\hyperlink{structstrtk_1_1token__grid_1_1options}{options})}\label{classstrtk_1_1token__grid_ac649536cbc20e0622ce9aa37b6ca49fc}
+
+\item 
+\hypertarget{classstrtk_1_1token__grid_ad59fab2d58ba1c7096a26f378d394b39}{{\bfseries token\-\_\-grid} (const std\-::string \&file\-\_\-name, const std\-::string \&column\-\_\-delimiters=\char`\"{},$\vert$;\textbackslash{}t\char`\"{}, const std\-::string \&row\-\_\-delimiters=\char`\"{}\textbackslash{}n\textbackslash{}r\char`\"{})}\label{classstrtk_1_1token__grid_ad59fab2d58ba1c7096a26f378d394b39}
+
+\item 
+\hypertarget{classstrtk_1_1token__grid_a29ec64793c4d7cb3edcdee396b3d514b}{{\bfseries token\-\_\-grid} (const unsigned char $\ast$input\-\_\-buffer, const std\-::size\-\_\-t \&input\-\_\-buffer\-\_\-size, const std\-::string \&column\-\_\-delimiters=\char`\"{},$\vert$;\textbackslash{}t\char`\"{}, const std\-::string \&row\-\_\-delimiters=\char`\"{}\textbackslash{}n\textbackslash{}r\char`\"{})}\label{classstrtk_1_1token__grid_a29ec64793c4d7cb3edcdee396b3d514b}
+
+\item 
+\hypertarget{classstrtk_1_1token__grid_a7160ee6c5abd8987da1ef08d1de6f2da}{{\bfseries token\-\_\-grid} (const char $\ast$input\-\_\-buffer, const std\-::size\-\_\-t \&input\-\_\-buffer\-\_\-size, const std\-::string \&column\-\_\-delimiters=\char`\"{},$\vert$;\textbackslash{}t\char`\"{}, const std\-::string \&row\-\_\-delimiters=\char`\"{}\textbackslash{}n\textbackslash{}r\char`\"{})}\label{classstrtk_1_1token__grid_a7160ee6c5abd8987da1ef08d1de6f2da}
+
+\item 
+\hypertarget{classstrtk_1_1token__grid_a02089cdcbad71bdb747b2e30803d9250}{{\bfseries token\-\_\-grid} (const std\-::string \&input\-\_\-buffer, const std\-::size\-\_\-t \&input\-\_\-buffer\-\_\-size, const std\-::string \&column\-\_\-delimiters=\char`\"{},;$\vert$\textbackslash{}t \char`\"{}, const std\-::string \&row\-\_\-delimiters=\char`\"{}\textbackslash{}n\textbackslash{}r\char`\"{})}\label{classstrtk_1_1token__grid_a02089cdcbad71bdb747b2e30803d9250}
+
+\item 
+\hypertarget{classstrtk_1_1token__grid_a8c2bd5d10669d54be9737f3fc1617c7a}{bool {\bfseries operator!} () const }\label{classstrtk_1_1token__grid_a8c2bd5d10669d54be9737f3fc1617c7a}
+
+\item 
+\hypertarget{classstrtk_1_1token__grid_a2219f5a94d7bd0039d3940daa67d9702}{std\-::string {\bfseries source\-\_\-file} () const }\label{classstrtk_1_1token__grid_a2219f5a94d7bd0039d3940daa67d9702}
+
+\item 
+\hypertarget{classstrtk_1_1token__grid_a7ce651fbc13d710bb0b3a08506a1e10c}{std\-::size\-\_\-t {\bfseries row\-\_\-count} () const }\label{classstrtk_1_1token__grid_a7ce651fbc13d710bb0b3a08506a1e10c}
+
+\item 
+\hypertarget{classstrtk_1_1token__grid_a0ad4b9b75d0b057fa729ae0994af951c}{std\-::size\-\_\-t {\bfseries min\-\_\-column\-\_\-count} () const }\label{classstrtk_1_1token__grid_a0ad4b9b75d0b057fa729ae0994af951c}
+
+\item 
+\hypertarget{classstrtk_1_1token__grid_ac2dd4c351fdec0610afc9895ab2068ae}{std\-::size\-\_\-t {\bfseries max\-\_\-column\-\_\-count} () const }\label{classstrtk_1_1token__grid_ac2dd4c351fdec0610afc9895ab2068ae}
+
+\item 
+\hypertarget{classstrtk_1_1token__grid_a532c5d00ff59b91c0b9157d2542d03ba}{range\-\_\-t {\bfseries token} (const unsigned int \&row, const std\-::size\-\_\-t \&col) const }\label{classstrtk_1_1token__grid_a532c5d00ff59b91c0b9157d2542d03ba}
+
+\item 
+\hypertarget{classstrtk_1_1token__grid_ab89a6a10be68772fdd4f432f1179a029}{{\footnotesize template$<$typename T $>$ }\\T {\bfseries get} (const unsigned int \&row, const std\-::size\-\_\-t \&col)}\label{classstrtk_1_1token__grid_ab89a6a10be68772fdd4f432f1179a029}
+
+\item 
+\hypertarget{classstrtk_1_1token__grid_a86f0273f734da4318f7ad372e9914bb3}{\hyperlink{classstrtk_1_1token__grid_1_1row__type}{row\-\_\-type} {\bfseries row} (const unsigned int \&row\-\_\-index) const }\label{classstrtk_1_1token__grid_a86f0273f734da4318f7ad372e9914bb3}
+
+\item 
+\hypertarget{classstrtk_1_1token__grid_ae6ddcb81768c86dc861fd5baae2bf776}{row\-\_\-range\-\_\-t {\bfseries all\-\_\-rows} () const }\label{classstrtk_1_1token__grid_ae6ddcb81768c86dc861fd5baae2bf776}
+
+\item 
+\hypertarget{classstrtk_1_1token__grid_a92c2dd968fcd0d4e2c2eb2fb8f29749c}{{\footnotesize template$<$typename Output\-Iterator $>$ }\\bool {\bfseries extract\-\_\-column\-\_\-checked} (const row\-\_\-range\-\_\-t \&row\-\_\-range, const std\-::size\-\_\-t \&index, Output\-Iterator out) const }\label{classstrtk_1_1token__grid_a92c2dd968fcd0d4e2c2eb2fb8f29749c}
+
+\item 
+\hypertarget{classstrtk_1_1token__grid_ae7d21a89311b8fd2c9af332860ba8353}{{\footnotesize template$<$typename Output\-Iterator $>$ }\\bool {\bfseries extract\-\_\-column\-\_\-checked} (const std\-::size\-\_\-t \&index, Output\-Iterator out) const }\label{classstrtk_1_1token__grid_ae7d21a89311b8fd2c9af332860ba8353}
+
+\item 
+\hypertarget{classstrtk_1_1token__grid_a28cbdd3c20d5501889a4eb817a5392cd}{{\footnotesize template$<$typename T , typename Allocator , template$<$ typename, typename $>$ class Sequence$>$ }\\void {\bfseries extract\-\_\-column\-\_\-checked} (const std\-::size\-\_\-t \&index, Sequence$<$ T, Allocator $>$ \&sequence) const }\label{classstrtk_1_1token__grid_a28cbdd3c20d5501889a4eb817a5392cd}
+
+\item 
+\hypertarget{classstrtk_1_1token__grid_a7e6cc8033653481c8bc57bfb00125b7a}{{\footnotesize template$<$typename T , typename Comparator , typename Allocator $>$ }\\void {\bfseries extract\-\_\-column\-\_\-checked} (const std\-::size\-\_\-t \&index, std\-::set$<$ T, Comparator, Allocator $>$ \&set) const }\label{classstrtk_1_1token__grid_a7e6cc8033653481c8bc57bfb00125b7a}
+
+\item 
+\hypertarget{classstrtk_1_1token__grid_aeffa5a82d3d763fe511b8d9316bec442}{{\footnotesize template$<$typename T , typename Comparator , typename Allocator $>$ }\\void {\bfseries extract\-\_\-column\-\_\-checked} (const std\-::size\-\_\-t \&index, std\-::multiset$<$ T, Comparator, Allocator $>$ \&multiset) const }\label{classstrtk_1_1token__grid_aeffa5a82d3d763fe511b8d9316bec442}
+
+\item 
+\hypertarget{classstrtk_1_1token__grid_a0539b939bcbd0dbdce9619ad1dbdbe68}{{\footnotesize template$<$typename Output\-Iterator $>$ }\\bool {\bfseries extract\-\_\-column} (const row\-\_\-range\-\_\-t \&row\-\_\-range, const std\-::size\-\_\-t \&index, Output\-Iterator out) const }\label{classstrtk_1_1token__grid_a0539b939bcbd0dbdce9619ad1dbdbe68}
+
+\item 
+\hypertarget{classstrtk_1_1token__grid_ac9c132ee606b0bc701807cd6fc448191}{{\footnotesize template$<$typename Output\-Iterator $>$ }\\bool {\bfseries extract\-\_\-column} (const std\-::size\-\_\-t \&index, Output\-Iterator out) const }\label{classstrtk_1_1token__grid_ac9c132ee606b0bc701807cd6fc448191}
+
+\item 
+\hypertarget{classstrtk_1_1token__grid_a14748bd5d525cc42e5345730c49b227b}{{\footnotesize template$<$typename Output\-Iterator0 , typename Output\-Iterator1 $>$ }\\bool {\bfseries extract\-\_\-column} (const row\-\_\-range\-\_\-t \&row\-\_\-range, const std\-::size\-\_\-t \&index0, const std\-::size\-\_\-t \&index1, Output\-Iterator0 out0, Output\-Iterator1 out1) const }\label{classstrtk_1_1token__grid_a14748bd5d525cc42e5345730c49b227b}
+
+\item 
+\hypertarget{classstrtk_1_1token__grid_a49eb65442baf75ebd88e099fecc17dcd}{{\footnotesize template$<$typename Output\-Iterator0 , typename Output\-Iterator1 , typename Output\-Iterator2 $>$ }\\bool {\bfseries extract\-\_\-column} (const row\-\_\-range\-\_\-t \&row\-\_\-range, const std\-::size\-\_\-t \&index0, const std\-::size\-\_\-t \&index1, const std\-::size\-\_\-t \&index2, Output\-Iterator0 out0, Output\-Iterator1 out1, Output\-Iterator2 out2) const }\label{classstrtk_1_1token__grid_a49eb65442baf75ebd88e099fecc17dcd}
+
+\item 
+\hypertarget{classstrtk_1_1token__grid_a13d2710d71c7752dfd45fd37dafe4658}{{\footnotesize template$<$typename Output\-Iterator0 , typename Output\-Iterator1 , typename Output\-Iterator2 , typename Output\-Iterator3 $>$ }\\bool {\bfseries extract\-\_\-column} (const row\-\_\-range\-\_\-t \&row\-\_\-range, const std\-::size\-\_\-t \&index0, const std\-::size\-\_\-t \&index1, const std\-::size\-\_\-t \&index2, const std\-::size\-\_\-t \&index3, Output\-Iterator0 out0, Output\-Iterator1 out1, Output\-Iterator2 out2, Output\-Iterator3 out3) const }\label{classstrtk_1_1token__grid_a13d2710d71c7752dfd45fd37dafe4658}
+
+\item 
+\hypertarget{classstrtk_1_1token__grid_a5d782f9012cbd0407d64ab8dcbff0e1b}{{\footnotesize template$<$typename Output\-Iterator0 , typename Output\-Iterator1 , typename Output\-Iterator2 , typename Output\-Iterator3 , typename Output\-Iterator4 $>$ }\\bool {\bfseries extract\-\_\-column} (const row\-\_\-range\-\_\-t \&row\-\_\-range, const std\-::size\-\_\-t \&index0, const std\-::size\-\_\-t \&index1, const std\-::size\-\_\-t \&index2, const std\-::size\-\_\-t \&index3, const std\-::size\-\_\-t \&index4, Output\-Iterator0 out0, Output\-Iterator1 out1, Output\-Iterator2 out2, Output\-Iterator3 out3, Output\-Iterator4 out4) const }\label{classstrtk_1_1token__grid_a5d782f9012cbd0407d64ab8dcbff0e1b}
+
+\item 
+\hypertarget{classstrtk_1_1token__grid_affbc5505d5f55c0c771e93b5c9456062}{void {\bfseries remove\-\_\-row} (const std\-::size\-\_\-t \&index)}\label{classstrtk_1_1token__grid_affbc5505d5f55c0c771e93b5c9456062}
+
+\item 
+\hypertarget{classstrtk_1_1token__grid_a27feac6693515a87afd47bdc6122579b}{{\footnotesize template$<$typename Predicate $>$ }\\bool {\bfseries remove\-\_\-row\-\_\-if} (const row\-\_\-range\-\_\-t \&row\-\_\-range, Predicate predicate)}\label{classstrtk_1_1token__grid_a27feac6693515a87afd47bdc6122579b}
+
+\item 
+\hypertarget{classstrtk_1_1token__grid_aa2bb0fd9baea92ef9c278f3497aa90c5}{{\footnotesize template$<$typename Predicate $>$ }\\bool {\bfseries remove\-\_\-row\-\_\-if} (Predicate predicate)}\label{classstrtk_1_1token__grid_aa2bb0fd9baea92ef9c278f3497aa90c5}
+
+\item 
+\hypertarget{classstrtk_1_1token__grid_a43a977d51545719381411a184eda0d2b}{{\footnotesize template$<$typename Predicate $>$ }\\std\-::size\-\_\-t {\bfseries remove\-\_\-token\-\_\-if} (const row\-\_\-range\-\_\-t \&row\-\_\-range, Predicate predicate)}\label{classstrtk_1_1token__grid_a43a977d51545719381411a184eda0d2b}
+
+\item 
+\hypertarget{classstrtk_1_1token__grid_a0f5c1cb46d952fe483bba3146d5dae9e}{std\-::size\-\_\-t {\bfseries remove\-\_\-empty\-\_\-tokens} (const row\-\_\-range\-\_\-t \&range)}\label{classstrtk_1_1token__grid_a0f5c1cb46d952fe483bba3146d5dae9e}
+
+\item 
+\hypertarget{classstrtk_1_1token__grid_a4156b906737d0c04ae48cb3250b2125d}{std\-::size\-\_\-t {\bfseries remove\-\_\-empty\-\_\-tokens} ()}\label{classstrtk_1_1token__grid_a4156b906737d0c04ae48cb3250b2125d}
+
+\item 
+\hypertarget{classstrtk_1_1token__grid_ae4b3714e4266deb370910c80f1aafcdf}{void {\bfseries enforce\-\_\-column\-\_\-count} (const row\-\_\-range\-\_\-t \&row\-\_\-range, const std\-::size\-\_\-t \&column\-\_\-count)}\label{classstrtk_1_1token__grid_ae4b3714e4266deb370910c80f1aafcdf}
+
+\item 
+\hypertarget{classstrtk_1_1token__grid_a5c52a50c4b116e2796af2d0c47cd3e98}{void {\bfseries enforce\-\_\-column\-\_\-count} (const std\-::size\-\_\-t \&column\-\_\-count)}\label{classstrtk_1_1token__grid_a5c52a50c4b116e2796af2d0c47cd3e98}
+
+\item 
+\hypertarget{classstrtk_1_1token__grid_a330338d2e63c1caa255f4684dbc59d3d}{void {\bfseries enforce\-\_\-min\-\_\-max\-\_\-column\-\_\-count} (const row\-\_\-range\-\_\-t \&row\-\_\-range, const std\-::size\-\_\-t \&min\-\_\-column\-\_\-count, const std\-::size\-\_\-t \&max\-\_\-column\-\_\-count)}\label{classstrtk_1_1token__grid_a330338d2e63c1caa255f4684dbc59d3d}
+
+\item 
+\hypertarget{classstrtk_1_1token__grid_a59142ea6440863ecf29d25dc01b2464c}{void {\bfseries enforce\-\_\-min\-\_\-max\-\_\-column\-\_\-count} (const std\-::size\-\_\-t \&min\-\_\-column\-\_\-count, const std\-::size\-\_\-t \&max\-\_\-column\-\_\-count)}\label{classstrtk_1_1token__grid_a59142ea6440863ecf29d25dc01b2464c}
+
+\item 
+\hypertarget{classstrtk_1_1token__grid_a2c1b0d9ae376704ed38baf9c1d654079}{void {\bfseries clear} (const bool force\-\_\-delete\-\_\-buffer=false)}\label{classstrtk_1_1token__grid_a2c1b0d9ae376704ed38baf9c1d654079}
+
+\item 
+\hypertarget{classstrtk_1_1token__grid_a912d800d904f662c95772c6897b34dbb}{std\-::size\-\_\-t {\bfseries column\-\_\-width} (const std\-::size\-\_\-t \&col, const row\-\_\-range\-\_\-t \&row\-\_\-range) const }\label{classstrtk_1_1token__grid_a912d800d904f662c95772c6897b34dbb}
+
+\item 
+\hypertarget{classstrtk_1_1token__grid_a1ceb0af08c55420e0fb53491985ab3a4}{std\-::size\-\_\-t {\bfseries column\-\_\-width} (const std\-::size\-\_\-t \&col) const }\label{classstrtk_1_1token__grid_a1ceb0af08c55420e0fb53491985ab3a4}
+
+\item 
+\hypertarget{classstrtk_1_1token__grid_ac69a8b7b4b849a0ab1ec45deb5f74c2d}{{\footnotesize template$<$typename Allocator , template$<$ typename, typename $>$ class Sequence$>$ }\\void {\bfseries get\-\_\-column\-\_\-widths} (Sequence$<$ std\-::size\-\_\-t, Allocator $>$ \&columns)}\label{classstrtk_1_1token__grid_ac69a8b7b4b849a0ab1ec45deb5f74c2d}
+
+\item 
+\hypertarget{classstrtk_1_1token__grid_aaabc19953917af9e17862c205320a77f}{{\footnotesize template$<$typename Allocator , template$<$ typename, typename $>$ class Sequence$>$ }\\void {\bfseries get\-\_\-column\-\_\-widths} (Sequence$<$ std\-::pair$<$ std\-::size\-\_\-t, std\-::size\-\_\-t $>$, Allocator $>$ \&columns)}\label{classstrtk_1_1token__grid_aaabc19953917af9e17862c205320a77f}
+
+\item 
+\hypertarget{classstrtk_1_1token__grid_afa2d901a340f5789c48c32f427049edd}{{\footnotesize template$<$typename T $>$ }\\std\-::size\-\_\-t {\bfseries accumulate\-\_\-row} (const std\-::size\-\_\-t \&row, T \&result) const }\label{classstrtk_1_1token__grid_afa2d901a340f5789c48c32f427049edd}
+
+\item 
+\hypertarget{classstrtk_1_1token__grid_a6a996c69e4f31b356dd151e0ac5b365e}{{\footnotesize template$<$typename T $>$ }\\std\-::size\-\_\-t {\bfseries accumulate\-\_\-column} (const std\-::size\-\_\-t \&col, const row\-\_\-range\-\_\-t \&row\-\_\-range, T \&result) const }\label{classstrtk_1_1token__grid_a6a996c69e4f31b356dd151e0ac5b365e}
+
+\item 
+\hypertarget{classstrtk_1_1token__grid_a0f4a159e1e1522393471c356ffe35442}{{\footnotesize template$<$typename T $>$ }\\std\-::size\-\_\-t {\bfseries accumulate\-\_\-column} (const std\-::size\-\_\-t \&col, T \&result) const }\label{classstrtk_1_1token__grid_a0f4a159e1e1522393471c356ffe35442}
+
+\item 
+\hypertarget{classstrtk_1_1token__grid_a721a557982e0c52dc1099dcd4f6d3d2f}{{\footnotesize template$<$typename T , typename Predicate $>$ }\\std\-::size\-\_\-t {\bfseries accumulate\-\_\-column} (const std\-::size\-\_\-t \&col, const row\-\_\-range\-\_\-t \&row\-\_\-range, Predicate p, T \&result) const }\label{classstrtk_1_1token__grid_a721a557982e0c52dc1099dcd4f6d3d2f}
+
+\item 
+\hypertarget{classstrtk_1_1token__grid_aca998d410f6711f2f9538d2469dbebb4}{{\footnotesize template$<$typename T , typename Predicate $>$ }\\std\-::size\-\_\-t {\bfseries accumulate\-\_\-column} (const std\-::size\-\_\-t \&col, Predicate p, T \&result) const }\label{classstrtk_1_1token__grid_aca998d410f6711f2f9538d2469dbebb4}
+
+\item 
+\hypertarget{classstrtk_1_1token__grid_a892435b18509516efb1fd3868bf4cdd2}{bool {\bfseries join\-\_\-row} (const std\-::size\-\_\-t \&row, const std\-::string \&delimiter, std\-::string \&result)}\label{classstrtk_1_1token__grid_a892435b18509516efb1fd3868bf4cdd2}
+
+\item 
+\hypertarget{classstrtk_1_1token__grid_a3dc5abf59a0dafb488d23ef5375e79de}{{\footnotesize template$<$typename Predicate $>$ }\\bool {\bfseries join\-\_\-row} (const std\-::size\-\_\-t \&row, Predicate predicate, const std\-::string \&delimiter, std\-::string \&result)}\label{classstrtk_1_1token__grid_a3dc5abf59a0dafb488d23ef5375e79de}
+
+\item 
+\hypertarget{classstrtk_1_1token__grid_ab4b10b683f628c782a0c7157a98961a7}{{\footnotesize template$<$typename Predicate $>$ }\\bool {\bfseries join\-\_\-row} (const std\-::size\-\_\-t \&row, Predicate predicate, const char $\ast$delimiter, std\-::string \&result)}\label{classstrtk_1_1token__grid_ab4b10b683f628c782a0c7157a98961a7}
+
+\item 
+\hypertarget{classstrtk_1_1token__grid_ad3b01cc1f22de77f8619e36fc303663b}{bool {\bfseries join\-\_\-column} (const std\-::size\-\_\-t \&col, const row\-\_\-range\-\_\-t \&row\-\_\-range, const std\-::string \&delimiter, std\-::string \&result) const }\label{classstrtk_1_1token__grid_ad3b01cc1f22de77f8619e36fc303663b}
+
+\item 
+\hypertarget{classstrtk_1_1token__grid_a54264f824fc72ef155d6894f4b7758f3}{bool {\bfseries join\-\_\-column} (const std\-::size\-\_\-t \&col, const std\-::string \&delimiter, std\-::string \&result) const }\label{classstrtk_1_1token__grid_a54264f824fc72ef155d6894f4b7758f3}
+
+\item 
+\hypertarget{classstrtk_1_1token__grid_a7037ecbd121044e985e8d2ec808567ce}{{\footnotesize template$<$typename Predicate $>$ }\\bool {\bfseries join\-\_\-column} (const std\-::size\-\_\-t \&col, const row\-\_\-range\-\_\-t \&row\-\_\-range, Predicate predicate, const std\-::string \&delimiter, std\-::string \&result) const }\label{classstrtk_1_1token__grid_a7037ecbd121044e985e8d2ec808567ce}
+
+\item 
+\hypertarget{classstrtk_1_1token__grid_a7d8b1f17b565704cebd55b0f7e449229}{{\footnotesize template$<$typename Predicate $>$ }\\bool {\bfseries join\-\_\-column} (const std\-::size\-\_\-t \&col, Predicate p, const std\-::string \&delimiter, std\-::string \&result) const }\label{classstrtk_1_1token__grid_a7d8b1f17b565704cebd55b0f7e449229}
+
+\item 
+\hypertarget{classstrtk_1_1token__grid_a4132c76d361ab57bc4dc82cde926b5cf}{{\footnotesize template$<$typename Transition\-Predicate , typename Function $>$ }\\bool {\bfseries sequential\-\_\-partition} (const row\-\_\-range\-\_\-t \&row\-\_\-range, Transition\-Predicate p, Function f)}\label{classstrtk_1_1token__grid_a4132c76d361ab57bc4dc82cde926b5cf}
+
+\item 
+\hypertarget{classstrtk_1_1token__grid_a95f13f0e94201dbdfa6087ebe2cc2c97}{{\footnotesize template$<$typename Transition\-Predicate , typename Function $>$ }\\bool {\bfseries sequential\-\_\-partition} (Transition\-Predicate p, Function f)}\label{classstrtk_1_1token__grid_a95f13f0e94201dbdfa6087ebe2cc2c97}
+
+\item 
+\hypertarget{classstrtk_1_1token__grid_a97aa8852c7d067747b6382c523a51fc3}{{\footnotesize template$<$typename Function $>$ }\\std\-::size\-\_\-t {\bfseries for\-\_\-each\-\_\-row} (const row\-\_\-range\-\_\-t \&row\-\_\-range, Function f) const }\label{classstrtk_1_1token__grid_a97aa8852c7d067747b6382c523a51fc3}
+
+\item 
+\hypertarget{classstrtk_1_1token__grid_aaa24ec0bfaaa32c506696023e667071d}{{\footnotesize template$<$typename Function $>$ }\\std\-::size\-\_\-t {\bfseries for\-\_\-each\-\_\-row} (Function f) const }\label{classstrtk_1_1token__grid_aaa24ec0bfaaa32c506696023e667071d}
+
+\item 
+\hypertarget{classstrtk_1_1token__grid_a8ea05f37ed9e771de9b3ead271019385}{bool {\bfseries load} (const std\-::string \&file\-\_\-name, const \hyperlink{structstrtk_1_1token__grid_1_1options}{token\-\_\-grid\-::options} \&\hyperlink{structstrtk_1_1token__grid_1_1options}{options})}\label{classstrtk_1_1token__grid_a8ea05f37ed9e771de9b3ead271019385}
+
+\item 
+\hypertarget{classstrtk_1_1token__grid_a5c03e0532faa379690862203d978cf60}{bool {\bfseries load} (unsigned char $\ast$buffer, const std\-::size\-\_\-t buffer\-\_\-size, const \hyperlink{structstrtk_1_1token__grid_1_1options}{token\-\_\-grid\-::options} \&\hyperlink{structstrtk_1_1token__grid_1_1options}{options})}\label{classstrtk_1_1token__grid_a5c03e0532faa379690862203d978cf60}
+
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classstrtk_1_1token__grid_aaf15a7ebe7a3df44076c40e302a88308}{static \hyperlink{structstrtk_1_1token__grid_1_1options}{token\-\_\-grid\-::options} {\bfseries default\-\_\-options} ()}\label{classstrtk_1_1token__grid_aaf15a7ebe7a3df44076c40e302a88308}
+
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+strtk.\-hpp\end{DoxyCompactItemize}
