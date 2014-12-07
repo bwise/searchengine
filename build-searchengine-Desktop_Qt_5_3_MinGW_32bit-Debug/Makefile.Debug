@@ -89,7 +89,7 @@ $(DESTDIR_TARGET):  $(OBJECTS)
 	$(LINKER) $(LFLAGS) -o $(DESTDIR_TARGET) $(OBJECTS)  $(LIBS)
 
 qmake: FORCE
-	@$(QMAKE) -spec win32-g++ CONFIG+=debug -o Makefile.Debug ..\searchengine\searchengine.pro
+	@$(QMAKE) -spec win32-g++ -o Makefile.Debug ..\searchengine\searchengine.pro
 
 qmake_all: FORCE
 
@@ -122,9 +122,9 @@ compiler_clean:
 debug/main.o: ../searchengine/main.cpp ../searchengine/dictionary.h \
 		../searchengine/avltree.h \
 		../searchengine/avlnode.h \
-		../searchengine/results.h \
-		../searchengine/filerecord.h \
 		../searchengine/word.h \
+		../searchengine/filerecord.h \
+		../searchengine/results.h \
 		../searchengine/Parser.h \
 		../searchengine/porter2_stemmer.h \
 		../searchengine/rapidxml.hpp \
@@ -135,16 +135,16 @@ debug/main.o: ../searchengine/main.cpp ../searchengine/dictionary.h \
 debug/dictionary.o: ../searchengine/dictionary.cpp ../searchengine/dictionary.h \
 		../searchengine/avltree.h \
 		../searchengine/avlnode.h \
-		../searchengine/results.h \
+		../searchengine/word.h \
 		../searchengine/filerecord.h \
-		../searchengine/word.h
+		../searchengine/results.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\dictionary.o ..\searchengine\dictionary.cpp
 
 debug/word.o: ../searchengine/word.cpp ../searchengine/word.h \
 		../searchengine/avltree.h \
 		../searchengine/avlnode.h \
-		../searchengine/results.h \
-		../searchengine/filerecord.h
+		../searchengine/filerecord.h \
+		../searchengine/results.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\word.o ..\searchengine\word.cpp
 
 debug/filerecord.o: ../searchengine/filerecord.cpp ../searchengine/filerecord.h \
@@ -155,9 +155,16 @@ debug/filerecord.o: ../searchengine/filerecord.cpp ../searchengine/filerecord.h 
 
 debug/Parser.o: ../searchengine/Parser.cpp ../searchengine/porter2_stemmer.h \
 		../searchengine/Parser.h \
+		../searchengine/dictionary.h \
+		../searchengine/avltree.h \
+		../searchengine/avlnode.h \
+		../searchengine/word.h \
+		../searchengine/filerecord.h \
+		../searchengine/results.h \
 		../searchengine/rapidxml.hpp \
 		../searchengine/rapidxml_print.hpp \
-		../searchengine/rapidxml_utils.hpp
+		../searchengine/rapidxml_utils.hpp \
+		../searchengine/strtk.hpp
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\Parser.o ..\searchengine\Parser.cpp
 
 debug/porter2_stemmer.o: ../searchengine/porter2_stemmer.cpp ../searchengine/porter2_stemmer.h
